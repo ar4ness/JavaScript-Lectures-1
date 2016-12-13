@@ -46,3 +46,10 @@ window.jQuery
 // var x = ["element1", "element2", "element3", 25, {}, [], null];
 // x.test = 123;
 // console.log(x.test);
+var x = ['123'];
+console.log(x); // ["123"];
+var y = x;
+console.log(y); // ["123"];
+y[0]=456;
+console.log(y); // [456];
+console.log(x); // [456];
