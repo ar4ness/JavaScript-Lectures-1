@@ -75,9 +75,121 @@
 // console.log(x--); // 9
 // console.log(--y); // 8
 
+// Comparison
+// console.log('x' > 'y') // false
+// console.log('x' > 'Y') // true
+// console.log('test' > 'tes') // true
+// console.log('test' > 'zes') // false
+// console.log('1' > '2') // false
+// console.log('12' > '2') // false
+// console.log(+'12' > +'2') // true
 
+//Comparison of different data types
+// console.log("'2' > 1 =", '2' > 1); // true
+// console.log("'1.0' == 1 = ", '1.0' == 1); // true
+// console.log("true == 1", true == 1); // true
+// console.log("false == 0 && false == '' =", false == 0 && false == ''); // true
+// console.log("false == 0 =", false == 0); // true
 
+// Comparison of null and undefined
+// console.log(null == undefined); // true
+// console.log(null > 0); // false
+// console.log(null == 0); // false
+// console.log(null < 0); // false
+// console.log(null >= 0); // true
+// console.log(null <= 0); // true
 
+//  To boolen type in JS can be modified everything exept of empty string:
+// true == !"", !false, !null, !undefined, !NaN, {}, [], function();
+// false == "", 0, null, undefined, NaN;
 
+// Operator if
+// if (true) {
+	// console.log(true);
+// }
+// // without curves (only for one-string) - better not to use
+// if(true)
+	// console.log("1");
 
+// if (25 && 0 || "text")
+	// console.log("success?");
+// else
+	// console.log("Not success:(");
+// if (25 && 0 || false){
+	// console.log("success?");
+// }else{
+	// console.log("Not success:(");
+// }
 
+// var userName = 325;
+// if (userName == "Vasya"){
+	// alert("Hello admin" + userName);
+// }
+// else if (typeof userName == "string"){
+	// alert("Hello user" + userName);
+// }
+// else {
+	// alert("You enter not a name!");
+// }
+
+// if(10>15) {
+	// var x = "test";
+// }else {
+	// var x = "rest";
+// }
+// // instead of this constuction we can write in one line:
+// // var x = /*if*/ 10 > 15 ? /*then*/ "test" : /*else*/ "rest";
+// var y = /*if*/ 10 < 15 ? /*then*/ "test" : /*else*/ "rest";
+// console.log(x); //rest
+// console.log(y); //test
+
+// var z = 10 > 15 ? "test": true ? "last" : "best";
+// console.log(z); //"last"
+
+// var x = "25";
+// switch (x) {
+	// case "text":
+		// console.log("Action 1");
+	// break;
+	// case "lost":
+		// console.log("Action 2");
+	// break;
+	// case true:
+		// console.log("Action 3");
+	// break;
+	// case 25:
+		// console.log("Action 4");
+	// break;
+	// default:
+		// console.log("Default action!");
+// }
+
+// if (typeof x == "string" && x >= 25 || x != "some text"){
+	// console.log("Action 1");
+// } // action 1
+
+// var x = [];
+// if (typeof x == "array" && x [0] === undefined){
+	// console.log("Action 1");
+// } else {
+	// console.log("Nope, because typeof x =", typeof x);
+// } // Nope, becouse typeof x =", typeof x = object
+
+// var x = [];
+// if (x [0] === undefined){
+	// console.log("Action 1");
+	// console.log("Because any not defined entity is 'undefined'...")
+// } else {
+	// console.log("Action2");
+// }
+
+ var x = 125, y = "";
+ if (x * 0){
+	 console.log("Action 1");
+	 console.log("Because any not defined entity is 'undefined'...")
+ } else if (!x + y){
+	 console.log("Action2");
+	console.log(!x + y);
+ } else {
+	console.log("Action 3");
+}
