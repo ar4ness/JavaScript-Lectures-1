@@ -183,13 +183,19 @@
 	// console.log("Action2");
 // }
 
- var x = 125, y = "";
- if (x * 0){
-	 console.log("Action 1");
-	 console.log("Because any not defined entity is 'undefined'...")
- } else if (!x + y){
-	 console.log("Action2");
-	console.log(!x + y);
- } else {
-	console.log("Action 3");
-}
+ // var x = 125, y = "";
+ // if (x * 0){
+	 // console.log("Action 1");
+	 // console.log("Because any not defined entity is 'undefined'...")
+ // } else if (!x + y){
+	 // console.log("Action2");
+	// console.log(!x + y);
+ // } else {
+	// console.log("Action 3");
+// }
+
+
+
+// Homework
+var x='', y=10, z = '';
+console.log(typeof x == 'string'&& y == 10 && z >=y);
