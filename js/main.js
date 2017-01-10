@@ -122,13 +122,46 @@
 // console.log(x);// a and b
 
 var string = "test string";
-console.log(string.substring(1, 4)); // est;
+// console.log(string.substring(1, 4)); // est;
 
-console.log(string.slice(1, 5)); // est;
-console.log(string.substr(1, 5)); // est s;
+// console.log(string.slice(1, 5)); // est;
+// console.log(string.substr(1, 5)); // est s;
 
-console.log(string.substring(5, 1)); // est;
-console.log(string.slice(5, 1)); //  returns nothing - empty string
-console.log(string.substring(5, -1)); // test  - if substring sees minus number - it takes from 0 to bigger number
-console.log(string.slice(5, -1)); // strin - he counts minus numbers from the end of string;
-console.log(string.slice(-5, -1)); // trin -
+// console.log(string.substring(5, 1)); // est;
+// console.log(string.slice(5, 1)); //  returns nothing - empty string
+// console.log(string.substring(5, -1)); // test  - if substring sees minus number - it takes from 0 to bigger number
+// console.log(string.slice(5, -1)); // strin - he counts minus numbers from the end of string;
+// console.log(string.slice(-5, -1)); // trin -
+
+// console.log(string.indexOf('t')); //0;
+// console.log(string.lastIndexOf('t')); //6;
+
+// console.log(string.indexOf('est')); //1;
+// console.log(string.lastIndexOf('ing')); //8;
+
+// var x = ~25;
+// console.log(x); // -26  becouse -(25+1);
+
+// var x = ~-10;
+// console.log(x); // 9  becouse -(-10+1);
+
+
+// console.log(~-1); // 0
+// console.log(~0); //-1;
+
+var x = "srting";
+console.log(~string.indexOf('t')); // -1
+console.log(~string.indexOf('rest'));// 0
+
+
+if (~string.indexOf(x)) {
+	console.log("string has variable x");
+}
+
+if (string.indexOf(x) != -1) {
+	console.log("string has variable x");
+}
+
+
+
+
