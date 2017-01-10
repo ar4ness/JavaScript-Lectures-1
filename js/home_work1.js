@@ -224,9 +224,23 @@
 // console.log(positiveMultiplier(3, 3, 5));
 
 
+// // // function positiveMultiplier(x, y, z) {
+// // // var result = true;
+	// // // for(y; y<=x; y+=x){
+		// // // if (isPositive(y)) result *=y;
+	// // // }
+// // // return result === true ? 0 : result;
+// // // }
+// // // console.log(positiveMultiplier(3, 3, 5));
+
+
 // s5. ex.3 +
 // var array = [];
 // function arraySummator(array) {
+	// if(!Array.isArray(array) || !array.length) {
+		// return 'invalid data';
+	// }
+	
 	// var z = 0;
 	// for (var i = 0; i < array.length; i++) {
 		// z += array[i];	
@@ -265,6 +279,8 @@
 // var array = [];
 // var stringArray = [];
 // function arrayToConcatString(array) {
+	 // if(!Array.isArray(array)) {
+		// return 'invalid data';
 	// for (var i = 0; i < array.length; i++) {
 		// if (typeof array[i] === "string"){
 			 // stringArray.push(array[i]);	
@@ -273,7 +289,20 @@
 	// }
 // console.log(arrayToConcatString(["i",  25,  "learn", null,  "java", undefined, [], '-', 'script', '6']));
 
-
+// // // function arrayToConcatString(array) {
+	 // // // if(!Array.isArray(array)) {
+		// // // return 'invalid data';
+		// // // var result = 0;
+	// // // for (var i = 0; i < array.length; i++) {
+		// // // if (typeof array[i] === "string"){
+			 // // // result += array[i];	
+		// // // }
+	// // // }return result;
+	// // // }
+// // // }
+	// // // console.log(arrayToConcatString(["i",  25,  "learn", null,  "java", undefined, [], '-', 'script', '6']));
+	
+	
 // s.6 ex.1 ---
 
 // var matrix = [
@@ -349,7 +378,7 @@
 	
 	// var a = 0;
 	// var b = 1;
-	// var z = 0;
+	// var z = 1;
 	// var s = 0;
 	// function summOfFibonachi(x) {
 		// for (var i = 1; i <= x; i++) {
@@ -360,7 +389,7 @@
 		// }
 		// return s;
 	// }
-	// console.log(summOfFibonachi(7));
+	// console.log(summOfFibonachi(5));
 
 // s.7 ex.2
 
@@ -378,7 +407,7 @@
 		// break;
 		// case typeof y === "boolean": newArray.push(x[i]);
 		// break;
-		// case typeof y === "array": newArray.push(x[i]);
+		// case array.isArray(y): newArray.push(x[i]);
 		// break;
 		// case typeof y === "object": newArray.push(x[i]);
 		// break;
@@ -400,8 +429,11 @@ function arrayToObject(array) {
 			stringArray.push(array[i]);
 		}else (typeof array[i] !== 'string')
 			elseArray.push(array[i]);		
-	} return stringArray;
-	var object[stringArray]=elseArray;
+	} 
+	var object = {};
+	for (var i = 0; i < stringArray.length; i++) {
+		i < elseArray.length ? obj[stringArray[i] = elseArray[i] : obj[stringArray[i]] = null];
+	} return obj;
 }
 console.log(arrayToObject([1, 5, 'gh', null, 'key', NaN]));
 
