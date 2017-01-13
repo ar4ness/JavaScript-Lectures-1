@@ -1,7 +1,7 @@
 // Objects
-// creating an object:
+//////////////// creating an object:
 // var obj = {};
-// var obj = new Object{};
+// var obj = new Object();
 // var object = {
 	// key1: 'value1',
 	// key2: null,
@@ -12,62 +12,74 @@
 // };
 
 // var object = {};
-	// object.key1 = 'value1';
-	// object.key2 = null;
-	// object["user"] = {
-		// 'firstname': "Vasya",
-		// lastname: "Sidorov"
+// object.key1 = 'value1';
+// object.key2 = null;
+// object["user"] = {
+	// 'firstname': "Vasya",
+	// lastname: "Sidorov"
 // };
-// // deleting of values
+// console.log(object.key1); //-- value1
+	// // value of object can be anything
+	
+// //////////////////////// deleting of values
 // console.log(object.key1);
 // delete object.key1;
-// console.log(object.key1);
+// console.log(object.key1); //-- undefined
 
+// ////////// to check is there a value in object
 // if(object.key1 !== undefined) {
 	// // some action
 // }	
-// if('key1' in object) {
+// if('key1' in object) {/* in tells that property is in object even if it is undefined*/
 	// // some action
 // }	
 // //example:
-// objectkey1 = undefined;
+// object.key1 = undefined;
 // if(object.key1 !== undefined) {
 	// console.log('no result');
 // }	
 // if('key1' in object) {
 	// console.log('has result');
-// }	
+// }	// -- has result
 
-// //
+
+// // // perebor of values (by using for in loop)
 // for (var key in object) {
-	// console.log(object[key]);
+	// console.log(object[key]); // new added values are set to back
 // }	
 
-// var obj = {
-	// '1': 'value1',
-	// '25': 'value2',
-	// '10': 'value3',
-	// 'test': 'value4',
-	// 'and': 'value5',
-	// '11': 'value6' 
-// } // console.log will console it: 1 10 11 25 test and
+var obj = {
+	'1': 'value1',
+	'25': 'value2',
+	'10': 'value3',
+	'test': 'value4',
+	'and': 'value5',
+	'11': 'value6' 
+} // console.log will console it: 1 10 11 25 test and
 
-// // for (var key in obj) {
-	// // console.log(key);
-// // }
-// // for (var key in obj) {
-	// // console.log(+key);
-// // } //console.log will console it: 1 10 11 25 NaN  - string cant be turned to number
+for (var key in obj) {
+	console.log(key);
+}
+for (var key in obj) {
+	console.log(+key);
+} //console.log will console it: 1 10 11 25 NaN  - string cant be turned to number
 
 
 // // 
-// var keys = Object.keys(obj);
-// console.log(keys); // output will be massiv
+var keys = Object.keys(obj);
+console.log(keys); // output will be massiv
 
-// for (var i = 0; i < keys.length; i++) {
-	// console.log(keys[i], obj[keys[i]]);
-// }
+for (var i = 0; i < keys.length; i++) {
+	console.log(keys[i], obj[keys[i]]);
+}
 
+/* configurable - if itis set to rue - it forbit changing attribtes of values and deleting it.  False by default.
+enumerable - show will the property counting in Object.keys() or by loop for...in. False by default.
+value - attribute , can be any acceptable property.Undefined bu default
+writable - can we change property to another property.False by default
+get - function-getter. Undefined bu default.
+set - function-setter. Undefined bu default
+ */
 // attributes of values
 // !!!!thre's some mistake in this code/ check it!
 // var object = {
@@ -312,20 +324,20 @@ var object = {
 // });
 // console.log(summOfNumbers); //15
 
-var users = [{
-	user1: 'name1',
-}, {
-	user2: 'name2',
-}, {
-	user3: 'name3',
-}
-];
+// var users = [{
+	// user1: 'name1',
+// }, {
+	// user2: 'name2',
+// }, {
+	// user3: 'name3',
+// }
+// ];
 
-var objectsWithNames = users.reduce(function (startValue, element, index, array ) {
-	startValue['user'+(index + 1)] = element['user'+(index + 1)];
-	return startValue;
-}, {});
-console.log(objectsWithNames); //15
+// var objectsWithNames = users.reduce(function (startValue, element, index, array ) {
+	// startValue['user'+(index + 1)] = element['user'+(index + 1)];
+	// return startValue;
+// }, {});
+// console.log(objectsWithNames); //15
 
 
 
