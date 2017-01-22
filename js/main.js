@@ -6,7 +6,7 @@
 // var x = 25;
 // console.log("- x = ", - x); //-25
 // var y = '25';
-// console.log("y = ", y); // string "25"
+// console.log("y = ", y); // string "25" printd black color
 // console.log("typeof y = ", typeof y); // string
 // console.log("+ y = ", + y); //  number 25
 // console.log("typeof y=", typeof +y); // number
