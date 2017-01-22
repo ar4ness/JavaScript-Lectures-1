@@ -74,6 +74,54 @@ function getRandomInt(min, max) {
 
 // console.log(blockGrower('120.5px', '150.7px'));
 
+// function blockGlower(width, height){
+  
+ // var w = parseFloat(width);
+ // var h = parseFloat(height);
+ 
+ // var wEnd = width.slice((""+w).length);
+ // var hEnd = width.slice((""+h).length);
+ // // var hEnd  ;
+ 
+ // return 'width:' + w*2 + wEnd + ',' + 'height:' + h*2 + hEnd +',';
+// }
+
+// console.log(blockGlower("12px", "20%"));
+
+// function blockGrower(width,height){
+ // var widthDim = width.slice(width.length - 2);
+ // var heightDim = height.slice(height.length - 2);
+ 
+ 
+ // var widthValue = Math.round(((parseFloat(width))  1.5)  10000)/10000;
+ // var heightValue = Math.round(((parseFloat(height))  1.5)  10000)/10000;
+ 
+  
+ 
+ // var obj = {};
+ // obj.widthOb = widthValue + widthDim;
+ // obj.heightOb = heightValue + heightDim;
+ // return obj;
+// }
+
+
+// function blockGrower(width,height){
+    // var RATE = 1.5;
+    // var w = round4Digits(parseFloat(width)*RATE);
+    // var h = round4Digits(parseFloat(height)*RATE);
+    // return {
+        // "width":w+getMetric(width),
+        // "height":h+getMetric(height)
+
+    // }
+// }
+// function round4Digits(number){
+    // return Math.round((parseFloat(number)*10000)/10000);   
+// }
+// function getMetric(value){
+    // return value.slice(parseFloat(value).toString().length)
+// }
+// console.log(blockGrower('220.5px', '50.7%'));
 
 ///////-----3---------
 // function getTwoNumbers(min, max) {
@@ -128,6 +176,65 @@ function getRandomInt(min, max) {
 
 //console.log(getTwoNumbers(4,123));
 
+// function getTwoNumbers(from, to) {
+ // var arr = [], 
+  // result = {};
+  
+ // for (var i = 0; i < 5; i++) {
+  // arr.push(getRandomint(from, to));
+ // }
+ 
+ // result['min'] = Math.min(arr[0], arr[1], arr[2], arr[3], arr[4]);
+ // result['max'] = Math.max(arr[0], arr[1], arr[2], arr[3], arr[4]);
+ 
+ 
+ // return result;
+// }
+
+// console.log(getTwoNumbers(1, 20));
+
+// function getTwoNumbers(minRandomForArray, maxRandomForArray){
+ 
+ // var tempArray = [];
+ // for(var i = 0; i < 5; i++){
+  // tempArray.push(getRandomInt(minRandomForArray, maxRandomForArray));
+ // }
+ 
+ // tempArray.sort(function compare(a, b) {return a-b;});
+ 
+ // console.log(tempArray);
+ // return '{min:' + tempArray[0] + ',' + 'max:' + tempArray[4] + '}';
+// }
+
+// function getTwoNumbers(min, max){
+ // var arr = [];
+ // var obj = {};
+ // for (var i = 0; i < 5; i++) {
+  // arr[i] = getRandom(min, max);
+ // } 
+ // obj.min = Math.min(arr[0],arr[1],arr[2],arr[3],arr[4]);
+ // obj.max = Math.max(arr[0],arr[1],arr[2],arr[3],arr[4]);
+ // return obj;
+// }
+
+// function getTwoNumbers(min,max){
+
+    // var arr = [];
+    // for(var i=0;i<5;i++){
+        // arr.push(getRandom(min,max));
+    // }
+
+    // return {
+        // "min":Math.min.apply(Math,arr),
+        // "max":Math.max.apply(Math,arr),
+    // }
+// }
+// function getRandom(min, max)
+// {
+  // return Math.floor(Math.random() * (max - min+1))  + min;
+// }
+// console.log(getTwoNumbers(4,123));
+
 ///////-----4---------
 // function checkNumberType(n) {
 	// if (n%1 == 0) {
@@ -170,9 +277,38 @@ function getRandomInt(min, max) {
     // var value2 = getRandomInt(0,string.length);
     // return string.substring(value1,value2);
 // }
-
+//console.log(getRandomPart("this is a string"));
 
 //---------
+// function getRandomPart(string) {
+ 
+ // var result = '',
+  // arr = [];
+  
+ // for (var i = 0; i < 2; i++) {
+  // arr. push(getRandomint(0, string.length));
+ // }
+
+ // arr.sort();
+ 
+ // result = string.slice(arr[0], arr[1]);
+ 
+ // return result;
+  
+// }
+
+// console.log(getRandomPart('string'));
+
+
+// function getRandomPart(string){
+  // var min = 1;
+  // var max = 12;
+  // var arr = [];
+  // for (var i = 0; i < 2; i++){
+   // arr[i]= getRandom(min, max);
+  // }
+ // return string.substring(arr[0],arr[1]);
+// }
 
 
 
@@ -213,30 +349,115 @@ function getRandomInt(min, max) {
 
 // console.log(getTwoSymbols("this is a string"));
 
-function wordRemove(word, string) {
-	var arrOfStrings = string.split(' ');
-	for (var i = 0; i < arrOfString.length; i++)
-	if (word === arrOfStrings[i]) {
-		string.replace(word, "");
-		return arrOfStrings.join(' ');
-	} else 
-	return string;
-}
+// function getTwoSymbols(string){
+ // var first = string[getRandomInt(0, string.length)];
+ // console.log(first);
+ // var second = string[getRandomInt(0, string.length)];
+ // console.log(second);
+ // return first.toLowerCase() === second.toLowerCase() ? first :  first + second; 
+// }
 
-console.log(wordRemove("word", " from word to work"));
+// console.log(getTwoSymbols('abcd aaaaaaa'));
 
-// function wordRemover(word, string){
- // var arrString = string.split(" ");
- // for (var i = 0; i < arrString.length; i++){
-  // if (word === arrString[i]){
-   // arrString.splice(i, 1); 
-  // }
+// function getTwoSymbols(string){
+ // string = string.toUpperCase();
+ // var arr = [];
+ // var min = 0;
+ // var max = string.length - 1;
+ // for (var i = 0; i < 2; i++){
+   // arr[i]= getRandom(min, max);
  // }
- // return arrString.join(" ");
+ 
+ // return string.charAt(arr[0]) === string.charAt(arr[1]) ? string.indexOf(arr[0]) : string.charAt(arr[0]) + string.charAt(arr[1]);
 // }
 
 
 
+// /// -----
+// //1 
+// function wordRemove(word, string) {
+	// var arrOfStrings = string.split(' ');
+	// for (var i = 0; i < arrOfString.length; i++)
+	// if (word === arrOfStrings[i]) {
+		// string.replace(word, "");
+		// return arrOfStrings.join(' ');
+	// } else 
+	// return string;
+// }
+
+// console.log(wordRemove("word", " from word to work"));
+
+// //2
+// function wordRemover (word, string) {
+	// var nextWordIndex = null;
+	// while(~(nextWordIndex = string.indexOf(word))) {
+		// var start = string.slice(0, nextWordIndex);
+		// var end = string.slice(nextWordIndex + word.length);
+		// string = start + end;
+	// } 
+	// return string;
+// }
+
+// //3 with array
+// function wordRemove(word, string) {
+	// var arrayOfWords = string.split(' ');
+	// var nextWordIndex = null;
+	// while(~(nextWordIndex = arrayOfWords.indexOf(word))) {
+		// arrayOfWords.splice(nextWordIndex, 1);
+	// }
+	// return arrayOfWords.join(' ');
+// }
+// //4 with filter
+// function wordRemover (word, string) {
+	// return string.split(' ')
+		// .filter(function (elem) {return elem !== word})
+		// .join(' ');
+// }
+
+
+// // function wordRemover(word, string){
+ // // var arrString = string.split(" ");
+ // // for (var i = 0; i < arrString.length; i++){
+  // // if (word === arrString[i]){
+   // // arrString.splice(i, 1); 
+  // // }
+ // // }
+ // // return arrString.join(" ");
+// // }
+
+// function wordRemover(word,string){
+ // var a=string.split("word");
+ 
+ // return a.join("");
+// }
+// console.log(wordRemover("word","There ara two words: word, word, sort"));
+
+
+function findBiggestApple(tree) {
+
+	for (var i = 0; i < tree.length; i++){
+		var max = Math.max.apply(null, tree);
+		console.log (max);
+			for (var j = 0; j < tree.length; j++){
+				if (tree[j] > max) {
+					//max = tree[j];
+					return tree[j];
+				}return max;
+	} 
+		}
+}
+	
+console.log(findBiggestApple([1, 2, 3, [6, 7, 9]]));	
+
+
+
+
+
+//-------slide 6 ex.3 +++
+// function getReversedString(string) {
+	// return string.split('').reverse().join('')
+// }
+// console.log(getReversedString('script'));		
 
 
 
@@ -244,18 +465,59 @@ console.log(wordRemove("word", " from word to work"));
 
 
 
+// var x="2*2";
+// var y=4;
+// var z=eval(x+y);
+// console.log(z);//48 why???
+
+// var x="2+2";
+// var y=4;
+// var z=eval(x+y);
+// console.log(z);//26 why???
+
+// // str = prompt('','2+2*2');
+// // f = new Function('','return '+str);
+// // alert(f());//6
+
+
+// function f(x,y, z=2) {
+	// return x + y **z;
+// }
+// console.log(f(3, 4));//19 (3+4*4);
+
+
+var a=0;
+for (b=1; b<=7; b+=a) {
+	document.write(b);
+	a++;
+}//1247 why???
 
 
 
 
 
 
+// var a = 4;
+// var b =4.0;
+// var c = "4";
+// var d = [4];
+// console.log(a+b+c+d);//844
 
-
-
-
-
-
+var x=0, y=0;
+for(var i=0; i<=2; i++) {
+	x=i; 
+	console.log(x); //0 1 2
+	console.log(i); //0 1 2
+	switch (x) {
+		case 0:
+		y=100;
+		case 1:
+		y+=10;
+		case 2:
+		y+=1;
+	}
+}
+console.log(y);//123?????
 
 
 
