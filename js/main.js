@@ -433,24 +433,108 @@ function getRandomInt(min, max) {
 // console.log(wordRemover("word","There ara two words: word, word, sort"));
 
 
-function findBiggestApple(tree) {
+// --------5 ex.1----
 
-	for (var i = 0; i < tree.length; i++){
-		var max = Math.max.apply(null, tree);
-		console.log (max);
-			for (var j = 0; j < tree.length; j++){
-				if (tree[j] > max) {
-					//max = tree[j];
-					return tree[j];
-				}return max;
-	} 
-		}
-}
+// function findBiggestApple(tree) {
+
+// var newArray=[];
+// function toOneDimension (tree, newArray) {
+	// //newArray = newArray || [];
+	// for (var i = 0; i < tree.length; i++) {
+		// if (Array.isArray(tree[i])) {
+			// toOneDimension(tree[i], newArray);
+		// }
+		// else {
+			// newArray.push(tree[i]);
+		// }
+	// }
+	// return(newArray);
+// }
+// var x = newArray;
+// return Math.max.apply(Math, x);
+// }
+// console.log(findBiggestApple([123, 45, [59, 1000]]));
+
+// function toOneDimension (tree, newArray) {
+	// //newArray = newArray || [];
+	// for (var i = 0; i < tree.length; i++) {
+		// if (Array.isArray(tree[i])) {
+			// toOneDimension(tree[i], newArray);
+		// }
+		// else {
+			// newArray.push(tree[i]);
+		// }
+	// }
+	// return(Math.max.apply(newArray);
+// }
+// console.log(toOneDimension ([123, 45, [59, 1000,[2000, 1],200]], []))
+
+
+//-------slide 6 ex.1
+// function getSortedString(string) {
+	// return string.split('').sort();
+// }
+// console.log(getSortedString('cvcxv 12 df 45 bf12'));
+
+
+
+// function getSortedString(string){
+// return Number(string.replace(/\D+/g, ''));
+// }
+
+function getSortedString(string){
 	
-console.log(findBiggestApple([1, 2, 3, [6, 7, 9]]));	
+	var temp = string.split(' ');
+	for (var i = 0; i < temp.length; i++){
+  // if (typeof temp[i] === 'number'){
+	var a = parseInt(temp[i])
+  }
+  return a;
+	
+}
+console.log(getSortedString('cvcxv 12 df 45 bf12'));
 
 
+// function getSortedString(string) {
+	// var temp = new Array();
+	// temp = string.split(' ');
+	// console.log(temp);
+	// var arrayOfNumbers = temp.filter(function(element, index, temp) {
+	// return typeof element === 'number';
+// })
+// console.log(arrayOfNumbers);
+	// arrayOfNumbers.sort(function (a, b) {
+		 // return a - b;
+ // });
+	// // if (typeof temp[i] == 'number') {
+		// // return var a = temp.sort();
+	// // }
+	// // if (typeof temp[i] == 'string') {
+		
+	// // }
+	// //string.substring();
+	// // string.sort(function (a, b) {return a-b;})
+	// //return (a + b);
+// }
+// console.log(getSortedString('cvcxv 12 df 45 bf12'));
 
+//------slide 6 ex.2 +++
+
+// function getInvertedNumbers(arrInverted) {
+	// if (!arrayOfNumber.isArray) {
+		// var arrInverted = [];
+		// for (var i = 0; i < arrayOfNumber.length; i++) {
+			// var currentElement = arrayOfNumber[i];
+		// // // return arrayOfNumber[i].reverse().push(arrInverted[i]);
+			// if (typeof currentElement == 'number' && currentElement > 0 || currentElement < 0) {
+				// arrInverted.push(-currentElement);
+			// }
+			// }return arrInverted;
+// } else {
+	// return "It's not an array of number";
+// }
+// }
+// console.log(getInvertedNumbers([1, 5, -6, 10, -12, null, 0, 25, 'bvb']));
 
 
 //-------slide 6 ex.3 +++
@@ -486,13 +570,11 @@ console.log(findBiggestApple([1, 2, 3, [6, 7, 9]]));
 // console.log(f(3, 4));//19 (3+4*4);
 
 
-var a=0;
-for (b=1; b<=7; b+=a) {
-	document.write(b);
-	a++;
-}//1247 why???
-
-
+// var a=0;
+// for (b=1; b<=7; b+=a) {
+	// console.log(b);//console.log outputs all values of b in a column while document.write output one string
+	// a++;
+// }//1247 +++
 
 
 
@@ -503,26 +585,35 @@ for (b=1; b<=7; b+=a) {
 // var d = [4];
 // console.log(a+b+c+d);//844
 
-var x=0, y=0;
-for(var i=0; i<=2; i++) {
-	x=i; 
-	console.log(x); //0 1 2
-	console.log(i); //0 1 2
-	switch (x) {
-		case 0:
-		y=100;
-		case 1:
-		y+=10;
-		case 2:
-		y+=1;
-	}
-}
-console.log(y);//123?????
+// var x=0, y=0;
+// for(var i=0; i<=2; i++) {
+	// x=i; 
+	// console.log(x); //0 1 2
+	// console.log(i); //0 1 2
+	// switch (x) {
+		// case 0:
+		// y=100;
+		// case 1:
+		// y+=10;
+		// case 2:
+		// y+=1;
+	// }
+// }
+// console.log(y);//123 - because there is no break 
 
+// function howMuch(x) {
+	// x++;
+	// var y=5%x;
+	// console.log(y);
+	// var z=y*x-1;
+	// return z-y;
+// }
+// console.log(howMuch(2));//3
 
-
-
-
+// var a = 1, x;
+// x = ++a + ++a;
+// x+=a;
+// document.write(x);//8
 
 
 
