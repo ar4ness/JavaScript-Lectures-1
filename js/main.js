@@ -484,7 +484,7 @@ function getRandomInt(min, max) {
 
 function getSortedString(string){
 	
-	var temp = string.split(' ');
+	var temp = string.split('');
 	for (var i = 0; i < temp.length; i++){
   // if (typeof temp[i] === 'number'){
 	var a = parseInt(temp[i])
@@ -536,6 +536,10 @@ console.log(getSortedString('cvcxv 12 df 45 bf12'));
 // }
 // console.log(getInvertedNumbers([1, 5, -6, 10, -12, null, 0, 25, 'bvb']));
 
+function getInvertedNumbers(arrInverted) {
+	return arrInverted.map(function (element) {return -element})
+}
+
 
 //-------slide 6 ex.3 +++
 // function getReversedString(string) {
@@ -545,8 +549,68 @@ console.log(getSortedString('cvcxv 12 df 45 bf12'));
 
 
 
+//----7. 1----
+function namesConcat(arrayOfObjects) {
+	return arrayOfObjects.map(function (element) {
+		return {
+			.......
+		})
+}
+
+function getTotalPrice(arrayOfProducts){
+ var sum = 0;
+ return arrayOfProducts.reduce(function (sum, element) {
+  return (element.inCart) ? sum + parseFloat(element.price) : sum}, sum);
+}
 
 
+//-----s8 ex/1----
+function getSortedArray(arrayOfObjects, sortBy, order){
+ if (!arrayOfObjects.length)
+  return arrayOfObjects;
+ var compare;
+ if(typeof arrayOfObjects[0][sortBy] === "number"){
+  compare = function (a, b) {return a[sortBy] - b[sortBy]};
+ }
+ else if (typeof arrayOfObjects[0][sortBy] === "string") {
+  compare = function (a, b) {return a[sortBy].toLowerCase() > b[sortBy].toLowerCase()};
+ }
+
+ return order === "descending" ? arrayOfObjects.sort(compare).reverse() : arrayOfObjects.sort(compare);
+}
+
+
+var users = [{name: 'Vasiliy', age: 7, country: 'Russia'},
+             {name: 'Kolyan', age: 5, country: 'Ukraine'},
+             {name: 'Petya', age: 3, country: 'USA'}];
+
+console.log(getSortedArray(users, "name", "ascending"));
+
+
+
+
+//---------s8.ex2-----
+
+function getSortedArray(arrayOfObjects, sortBy, order){
+ if (!arrayOfObjects.length)
+  return arrayOfObjects;
+ var compare;
+ if(typeof arrayOfObjects[0][sortBy] === "number"){
+  compare = function (a, b) {return a[sortBy] - b[sortBy]};
+ }
+ else if (typeof arrayOfObjects[0][sortBy] === "string") {
+  compare = function (a, b) {return a[sortBy].toLowerCase() > b[sortBy].toLowerCase()};
+ }
+
+ return order === "descending" ? arrayOfObjects.sort(compare).reverse() : arrayOfObjects.sort(compare);
+}
+
+
+var users = [{name: 'Vasiliy', age: 7, country: 'Russia'},
+             {name: 'Kolyan', age: 5, country: 'Ukraine'},
+             {name: 'Petya', age: 3, country: 'USA'}];
+
+console.log(getSortedArray(users, "name", "ascending"));
 
 
 // var x="2*2";
