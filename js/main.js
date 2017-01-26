@@ -166,4 +166,44 @@ console.log(testText.replace(/"(.+?)"/g, function (elem) { // "asd", 123, 123
 	}
 }))
 
+console.log(testText.replace(/"(.+?)"/g, 123));
+
+
+var fileName = "text.txt"
+console.log(fileName.match(/.\w+$/g));
+console.log(fileName.match(/.jpg|png|gif$/g));
+
+
+var fileName = "text.png"
+
+console.log(fileName.match(/.jpg|png|gif$/g));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
