@@ -433,93 +433,212 @@ function getRandomInt(min, max) {
 // console.log(wordRemover("word","There ara two words: word, word, sort"));
 
 
-// --------5 ex.1----
-
+// ------------------------------5 ex.1-+++
+// 1 variant +++:
+// var arr = [];
 // function findBiggestApple(tree) {
-
-// var newArray=[];
-// function toOneDimension (tree, newArray) {
-	// //newArray = newArray || [];
 	// for (var i = 0; i < tree.length; i++) {
-		// if (Array.isArray(tree[i])) {
-			// toOneDimension(tree[i], newArray);
-		// }
-		// else {
-			// newArray.push(tree[i]);
-		// }
+			 // if (!Array.isArray(tree[i])) {
+				// arr.push(tree[i]);
+			 // } else {
+				 // findBiggestApple(tree[i]);
+			 // }
 	// }
-	// return(newArray);
-// }
-// var x = newArray;
-// return Math.max.apply(Math, x);
-// }
-// console.log(findBiggestApple([123, 45, [59, 1000]]));
-
-// function toOneDimension (tree, newArray) {
-	// //newArray = newArray || [];
+	// return arr.sort(function(a, b) {
+		// return a - b;
+		// // if (a > b) return 1;
+		// // if (a < b) return -1;
+	// })[arr.length - 1];
+ // }
+ // console.log(findBiggestApple([123, 45, [59, 1000], [22, 55, [2000, 100], 70]])); //2000;
+ 
+ // 2 variant +++:
+ // function findBiggestApple(tree, biggestApple) {
 	// for (var i = 0; i < tree.length; i++) {
-		// if (Array.isArray(tree[i])) {
-			// toOneDimension(tree[i], newArray);
-		// }
-		// else {
-			// newArray.push(tree[i]);
-		// }
+			 // if (Array.isArray(tree[i])) {
+				// biggestApple = findBiggestApple(tree[i], biggestApple);
+			 // } else {
+				 // biggestApple = biggestApple === undefined ? tree[i] : biggestApple < tree[i] ? tree[i] : biggestApple;
+			 // }
 	// }
-	// return(Math.max.apply(newArray);
-// }
-// console.log(toOneDimension ([123, 45, [59, 1000,[2000, 1],200]], []))
-
-
-//-------slide 6 ex.1
-// function getSortedString(string) {
-	// return string.split('').sort();
-// }
-// console.log(getSortedString('cvcxv 12 df 45 bf12'));
-
-
-
-// function getSortedString(string){
-// return Number(string.replace(/\D+/g, ''));
-// }
-
-function getSortedString(string){
+	// return biggestApple;
 	
-	var temp = string.split('');
-	for (var i = 0; i < temp.length; i++){
-  // if (typeof temp[i] === 'number'){
-	var a = parseInt(temp[i])
-  }
-  return a;
-	
-}
-console.log(getSortedString('cvcxv 12 df 45 bf12'));
-
-
-// function getSortedString(string) {
-	// var temp = new Array();
-	// temp = string.split(' ');
-	// console.log(temp);
-	// var arrayOfNumbers = temp.filter(function(element, index, temp) {
-	// return typeof element === 'number';
-// })
-// console.log(arrayOfNumbers);
-	// arrayOfNumbers.sort(function (a, b) {
-		 // return a - b;
- // });
-	// // if (typeof temp[i] == 'number') {
-		// // return var a = temp.sort();
-	// // }
-	// // if (typeof temp[i] == 'string') {
+ // }
+ // console.log(findBiggestApple([123, 45, [59, 1000], [22, 55, [2000, 100], 70]])); //2000;
+ 
+ // 3 variant-----
+// function findBiggestApple(tree) {
+// //var newArray=[];
+	// function toOneDimension (tree, newArray) {
+		// var newArray = newArray || [];
+		// for (var i = 0; i < tree.length; i++) {
+			// if (Array.isArray(tree[i])) {
+				// toOneDimension(tree[i], newArray);
+			// }
+			// else {
+				// newArray.push(tree[i]);
+			// }
+		// }
+		// return newArray.sort(function(a, b) {
+		// return a - b;
+	 // })[newArray.length - 1];
 		
-	// // }
-	// //string.substring();
-	// // string.sort(function (a, b) {return a-b;})
-	// //return (a + b);
+	// }
+// // return newArray.sort(function(a, b) {
+		// // return a - b;
+	 // // })[newArray.length - 1];
+  // }
+// console.log(findBiggestApple([123, 45, [59, 1000], [22, 55, [2000, 100], 70]])); //2000;
+
+// // // // var x = newArray;
+// // // // return Math.max.apply(Math, x);
+// // // // }
+// // // // console.log(findBiggestApple([123, 45, [59, 1000]]));
+
+// this funcion works, but when i tried to insert it to above function it did not work
+// function toOneDimension (tree, newArray) {
+	// //newArray = newArray || [];
+	// for (var i = 0; i < tree.length; i++) {
+		// if (Array.isArray(tree[i])) {
+			// toOneDimension(tree[i], newArray);
+		// }
+		// else {
+			// newArray.push(tree[i]);
+		// }
+	// }
+	// return newArray;
 // }
-// console.log(getSortedString('cvcxv 12 df 45 bf12'));
+// console.log(toOneDimension([123, 45, [59, 1000,[2000, 1],200]], []));
+
+// ------------------------------5 ex.2+++
+//variant 1+++
+// var result = [];
+// function getObjectsValues(tree) {
+	// for (var key in tree) {
+		// if (typeof tree[key] !== 'object') {
+		// result.push(tree[key]);
+// } else {getObjectsValues(tree[key])}
+	// }
+	// return result;
+// }
+
+// var obj = {
+	// key1:'some',
+	// key2: {
+		// key3:'value',
+		// key4:{
+			// key5:'inside'
+		// }
+	// }
+// }
+// console.log(getObjectsValues(obj)); //["some", "value", "inside"];
+
+// //variant 2+++
+// function getObjectsValues(tree) {
+	// result = result || [];
+	// for (var key in tree) {
+		// if (typeof tree[key] === 'object' && tree[key] !== null && !Array.isArray(tree[key])) {
+		// getObjectsValues(tree[key], result);
+// } else {result.push(tree[key])};
+	// }
+	// return result;
+// }
+// console.log(getObjectsValues(obj)); //["some", "value", "inside"];
+
+
+//------------------slide 5 ex. 3
+// variant 1+++
+// function getRequiredSymbols(string, type) {
+	// var arrOfSymbols = string.split('');
+	// result = [];
+	// for (var i = 0; i < arrOfSymbols.length; i++) {
+		// if (type === 'number' && typeof +arrOfSymbols[i] === type && !isNaN(+arrOfSymbols[i])) {
+			// result.push(arrOfSymbols[i]);
+		// } else if
+			// (type === 'string' && isNaN(+arrOfSymbols[i])) {
+				// result.push(arrOfSymbols[i]);
+			// }
+	// }
+	// return result.join('');
+// }
+// console.log(getRequiredSymbols('string123456', 'number')); //123456
+// console.log(getRequiredSymbols('string123456', 'string'));//string;
+
+
+//----------------------slide 6 ex.1
+//variant 1+++
+// function getSortedString(string) {
+	// var splittedString  = string.split(''),
+	// numbers = [],
+	// symbols = [];
+	// for (var i = 0; i < splittedString.length; i++) {
+		// !isNaN(+splittedString[i]) ? numbers.push(splittedString[i]) : symbols.push(splittedString[i]);
+	// }
+	// return numbers.sort().join('') + symbols.sort().join('');
+// }
+// console.log(getSortedString('cvcxv 12 df 45 bf12'));// 112245bccdffvvx;
+
+// //variant 2 using above mentioned function++++
+// function getSortedString(string) {
+	// var splittedString  = string.split(''),
+	// numbers = getRequiredSymbols(string, 'number'),
+	// symbols = getRequiredSymbols(string, 'string');
+	
+	// return numbers.split('').sort().join('') + symbols.split('').sort().join('');
+// }
+// console.log(getSortedString('cvcxv 12 df 45 bf12'));// 112245bccdffvvx;
+
+
+
+// // // function getSortedString(string) {
+	// // // return string.split('').sort();
+// // // }
+// // // console.log(getSortedString('cvcxv 12 df 45 bf12'));
+
+
+
+// // // function getSortedString(string){
+// // // return Number(string.replace(/\D+/g, ''));
+// // // }
+
+// // // function getSortedString(string){
+	
+	// // // var temp = string.split('');
+	// // // for (var i = 0; i < temp.length; i++){
+  // // // // if (typeof temp[i] === 'number'){
+	// // // var a = parseInt(temp[i])
+  // // // }
+  // // // return a;
+	
+// // // }
+// // // console.log(getSortedString('cvcxv 12 df 45 bf12'));
+
+
+// // // function getSortedString(string) {
+	// // // var temp = new Array();
+	// // // temp = string.split(' ');
+	// // // console.log(temp);
+	// // // var arrayOfNumbers = temp.filter(function(element, index, temp) {
+	// // // return typeof element === 'number';
+// // // })
+// // // console.log(arrayOfNumbers);
+	// // // arrayOfNumbers.sort(function (a, b) {
+		 // // // return a - b;
+ // // // });
+	// // // // if (typeof temp[i] == 'number') {
+		// // // // return var a = temp.sort();
+	// // // }
+	// // // if (typeof temp[i] == 'string') {
+		
+	// // // }
+	// // //string.substring();
+	// // // string.sort(function (a, b) {return a-b;})
+	// // //return (a + b);
+// // }
+// // console.log(getSortedString('cvcxv 12 df 45 bf12'));
 
 //------slide 6 ex.2 +++
-
+// variant1 (my)++
 // function getInvertedNumbers(arrInverted) {
 	// if (!arrayOfNumber.isArray) {
 		// var arrInverted = [];
@@ -536,35 +655,148 @@ console.log(getSortedString('cvcxv 12 df 45 bf12'));
 // }
 // console.log(getInvertedNumbers([1, 5, -6, 10, -12, null, 0, 25, 'bvb']));
 
-function getInvertedNumbers(arrInverted) {
-	return arrInverted.map(function (element) {return -element})
-}
-
-
-//-------slide 6 ex.3 +++
-// function getReversedString(string) {
-	// return string.split('').reverse().join('')
+// variant 2+++
+// function getInvertedNumbers(arrayOfNumbers) {
+	// var result = [];
+	// for (var i = 0; i < arrayOfNumbers.length; i++) {
+		// result.push(-arrayOfNumbers[i]);
+	// }
+// return result;
 // }
-// console.log(getReversedString('script'));		
+// console.log(getInvertedNumbers([1, 5, -6, 10, -12, null, 0, 25, 'bvb'])); //[-1, -5, 6, -10, 12, -0, -0, -25, NaN]
+
+// variant 3+++
+// function getInvertedNumbers(arrInverted) {
+	// return arrInverted.map(function (element) {return -element})
+// }
+// console.log(getInvertedNumbers([1, 5, -6, 10, -12, null, 0, 25, 'bvb'])); //[-1, -5, 6, -10, 12, -0, -0, -25, NaN];//[-1, -5, 6, -10, 12, -0, -0, -25, NaN]
+
+// ////////////////-------slide 6 ex.3 +++
+// // function getReversedString(string) {
+	// // return string.split('').reverse().join('')
+// // }
+// // console.log(getReversedString('script'));		
 
 
 
-//----7. 1----
-function namesConcat(arrayOfObjects) {
-	return arrayOfObjects.map(function (element) {
-		return {
-			.......
-		})
-}
+// //----------------7. ex.1----
 
-function getTotalPrice(arrayOfProducts){
- var sum = 0;
- return arrayOfProducts.reduce(function (sum, element) {
-  return (element.inCart) ? sum + parseFloat(element.price) : sum}, sum);
-}
+//variant 1 +++
+// function namesConcatenator(arrayOfObjects) {
+	// var result=[];
+	// for (var i=0; i< arrayOfObjects.length; i++) {
+	// result.push({});
+	// result[i].fullName = arrayOfObjects[i].firstName + " " + arrayOfObjects[i].lastName;
+	// result[i].age = arrayOfObjects[i].age;
+	// result[i].gender = arrayOfObjects[i].gender;
+	// }
+	// return result;
+// }
+// var users = [{firstName: "Vasya", lastName: "Pupkin", age: 23, gender: "male"}, {firstName: "Kolya", lastName: "Bupkin", age: 43, gender: "male"}];
+// console.log(namesConcatenator(users));//[Object, Object] - > Array[2]
+// /*0
+// :
+// Object
+// age
+// :
+// 23
+// fullName
+// :
+// "Vasya Pupkin"
+// gender
+// :
+// "male"
+// __proto__
+// :
+// Object
+// 1
+// :
+// Object
+// age
+// :
+// 43
+// fullName
+// :
+// "Kolya Bupkin"
+// gender
+// :
+// "male"
+// __proto__
+// :
+// Object
+// length
+// :
+// 2
+// __proto__
+// :
+// Array[0]*/
+// console.log(users);
+
+// // variant 2 ++++
+// function namesConcat(arrayOfObjects) {
+	// return arrayOfObjects.map(function (elem) {
+		// return {
+			 // fullName: elem.firstName + " " + elem.lastName, 
+			 // age: elem.age,
+			 // gender: elem.gender
+		// }
+		// })
+// }
+// console.log(namesConcatenator(users));// same output;
+
+////// ------slide 7 ex.2------
+// variant 1 +++
+// function getBorderNumbers(arrayOfNumbers, takeFrom) {
+	// var result = [];
+	// if (takeFrom === "first") {
+		// for (var i=0; i< arrayOfNumbers.length; i++) {
+			// if (arrayOfNumbers[i] > 0 && result.length < 3) {
+				// result.push(arrayOfNumbers[i]);
+				
+			// }break;
+		// }
+	// } else if (takeFrom === "last") {
+		// for (var i=arrayOfNumbers.length-1; i< arrayOfNumbers.length; i--) {
+			// if (arrayOfNumbers[i] > 0 && result.length < 3) {
+				// result.push(arrayOfNumbers[i]);
+				// break;
+			// }
+		// }
+	// }
+	// return result;
+// }
+// console.log(getBorderNumbers([1, -2, 3, -4, 10 ], "first"));// [1, 3, 10];
+// console.log(getBorderNumbers([1, -2, 3, -4, 10, 5, -25, 20, 0 ], "last"));// [20, 5, 10]
+
+// // variant 2 +++
+// function getBorderNumbers(arrayOfNumbers, takeFrom) {
+	// if (takeFrom === "first") {
+		// return arrayOfNumbers.reduce(arrayBuilder, []);
+	// }
+	// if (takeFrom === "last") {
+		// return arrayOfNumbers.reduceRight(arrayBuilder, []);
+	// }
+	// function arrayBuilder(array, elem) {
+		// if (elem > 0 && array.length < 3)
+			// array.push(elem);
+		// return array;
+	// }
+// }
+// console.log(getBorderNumbers([1, -2, 3, -4, 10 ], "first"));// [1, 3, 10];
+// console.log(getBorderNumbers([1, -2, 3, -4, 10, 5, -25, 20, 0 ], "last"));// [20, 5, 10]
 
 
-//-----s8 ex/1----
+//// ---------slide 7 ex 3-------+++++
+// function getTotalPrice(arrayOfProducts){
+ // var sum = 0;
+ // return arrayOfProducts.reduce(function (sum, element) {
+  // return (element.inCart) ? sum + parseFloat(element.price) : sum}, sum);
+// }
+// console.log(getTotalPrice([{name: 'apples', price: "10$", "inCart": true}, {name: 'pears', price: "5$", "inCart": true}, {name: 'bananas', price: "15$", "inCart": true}]));// 30;
+
+
+// //-----s8 ex.1----
+// variant 1+++
 function getSortedArray(arrayOfObjects, sortBy, order){
  if (!arrayOfObjects.length)
   return arrayOfObjects;
@@ -581,38 +813,49 @@ function getSortedArray(arrayOfObjects, sortBy, order){
 
 
 var users = [{name: 'Vasiliy', age: 7, country: 'Russia'},
-             {name: 'Kolyan', age: 5, country: 'Ukraine'},
+             {name: 'Kolya', age: 5, country: 'Ukraine'},
              {name: 'Petya', age: 3, country: 'USA'}];
 
-console.log(getSortedArray(users, "name", "ascending"));
+console.log(getSortedArray(users, "name", "ascending")); // /*Array[3]0: Objectage: 5country: "Ukraine"name: "Kolya"__proto__: Object1: Objectage: 3country: "USA"name: "Petya"__proto__: Object2: Objectage: 7country: "Russia"name: "Vasiliy"__proto__: Objectlength: 3__proto__: Array[0]*/
 
 
 
 
-//---------s8.ex2-----
+//-variant 2
 
-function getSortedArray(arrayOfObjects, sortBy, order){
- if (!arrayOfObjects.length)
-  return arrayOfObjects;
- var compare;
- if(typeof arrayOfObjects[0][sortBy] === "number"){
-  compare = function (a, b) {return a[sortBy] - b[sortBy]};
- }
- else if (typeof arrayOfObjects[0][sortBy] === "string") {
-  compare = function (a, b) {return a[sortBy].toLowerCase() > b[sortBy].toLowerCase()};
- }
+// function getSortedArray(arrayOfObjects, sortBy, order){
+ // if (!arrayOfObjects.length)
+  // return arrayOfObjects;
+ // var compare;
+ // if(typeof arrayOfObjects[0][sortBy] === "number"){
+  // compare = function (a, b) {return a[sortBy] - b[sortBy]};
+ // }
+ // else if (typeof arrayOfObjects[0][sortBy] === "string") {
+  // compare = function (a, b) {return a[sortBy].toLowerCase() > b[sortBy].toLowerCase()};
+ // }
+ // return order === "descending" ? arrayOfObjects.sort(compare).reverse() : arrayOfObjects.sort(compare);
+// }
 
- return order === "descending" ? arrayOfObjects.sort(compare).reverse() : arrayOfObjects.sort(compare);
+// var users = [{name: 'Vasiliy', age: 7, country: 'Russia'},
+             // {name: 'Kolyan', age: 5, country: 'Ukraine'},
+             // {name: 'Petya', age: 3, country: 'USA'}];
+
+// console.log(getSortedArray(users, "name", "ascending"));
+
+
+
+//------------slide 8 ex.2----
+function greetingMatureUsers(arrayOfObjects) {
+var newArrayOfObjects = [];
+for (var i=0; i< arrayOfObjects.length; i++) {
+	if(+arrayOfObjects[i].age>18) {
+		arrayOfObjects[i].greeting=arrayOfObjects[i].gender == "male" ? "Welcome master" + arrayOfObjects[i].name : "Welcome mistress" + arrayOfObjects[i].name;
+		newArrayOfObjects.push(arrayOfObjects[i]);
+	}
 }
-
-
-var users = [{name: 'Vasiliy', age: 7, country: 'Russia'},
-             {name: 'Kolyan', age: 5, country: 'Ukraine'},
-             {name: 'Petya', age: 3, country: 'USA'}];
-
-console.log(getSortedArray(users, "name", "ascending"));
-
-
+return newArrayOfObjects;
+}
+console.log(greetingMatureUsers([{name: 'Vasiliy', age: 7, 'gender': "male"},{name: 'Vitaliy', age: 17, 'gender': "male"}, {name: 'Dmytriy', age: 27, 'gender': "male"} ]))
 // var x="2*2";
 // var y=4;
 // var z=eval(x+y);
