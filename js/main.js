@@ -2,30 +2,80 @@
 // |^ it is for functions
 
 
+/*Comments:
 
-////Dates
+   JavaScript Date objects can only be instantiated by calling JavaScript Date as a constructor: calling it as a regular function (i.e. without the new operator) will return a string rather than a Date object; unlike other JavaScript object types, JavaScript Date objects have no literal syntax.
+
+  Date.prototype - Allows the addition of properties to a JavaScript Date object.
+
+  Date.length - The value of Date.length is 7. This is the number of arguments handled by the constructor.*/
+
+/*Comments:
+
+Date.now() - Returns the numeric value corresponding to the current time - the number of milliseconds elapsed since 1 January 1970 00:00:00 UTC.
+
+Date.prototype.getDate() - Returns the day of the month (1-31) for the specified date according to local time.
+
+Date.prototype.getDay() - Returns the day of the week (0-6) for the specified date according to local time.
+
+Date.prototype.getMonth() - Returns the month (0-11) in the specified date according to local time.
+
+Date.prototype.setDate() - Sets the day of the month for a specified date according to local time.
+
+Date.prototype.setMonth() - Sets the month for a specified date according to local time.
+
+Date.prototype.toJSON() - Returns a string representing the Date using toISOString(). Intended for use by JSON.stringify().*/
+
+////-----------Dates
+
+
+// creating a date
 //var currentDate =  new Date();
+
+// if it is one digits, date is creating so: 
 // console.log(currentDate); //Thu Jan 26 2017 18:38:49 GMT+0200 (FLE Standard Time);
 // console.log(new Date(1000));// Thu Jan 01 1970 02:00:01 GMT+0200 (FLE Standard Time);
 // console.log(new Date(-1000)); //Thu Jan 01 1970 01:59:59 GMT+0200 (FLE Standard Time);
+
+// if it is set of digits, date is creating so: 
 // console.log(new Date(2000, 0, 1, 0, 0, 0, 0)); //Sat Jan 01 2000 00:00:00 GMT+0200 (FLE Standard Time);
 // console.log(new Date(2000, 0, 1)); //Sat Jan 01 2000 00:00:00 GMT+0200 (FLE Standard Time);
+
+// если аргумент строка: Т используется ка разделитель, часть Z означает временную зону - в формате +-hh:mm, либо символ Z, обозначабщий  UTC.
 // console.log(new Date("2000-01-01T00:00:01.500+2:00"));
 // console.log(new Date("2000-01-01"));
 
+// у конструктора Date также есть метод parse, который принимает в себя строку и возвращает количество милисекунд прошедших с 1.1.1970-го. Date parse("2000-02-01T20:20:20.200z") //949436420200;
 
-// //Methods to get some values from date
-// console.log(currentDate.getFullYear());//2017;
-// console.log(currentDate.getMonth());//0
-// console.log(currentDate.getDate());//26
+// при создании даты из строки месяцы начинаются с 1
+// если параметры создания даты не корректны, то получим строку invalid date.
+
+// ------- //Methods to get some values from date---------
+// console.log(currentDate.getFullYear());//2017; - 4 digits
+// console.log(currentDate.getMonth());//0 from 0 to 11
+// console.log(currentDate.getDate());//26 from 1 to 31;
 // console.log(currentDate.getHours());//18 
 // console.log(currentDate.getMinutes())//53 
 // console.log(currentDate.getSeconds()) //22
 // console.log(currentDate.getMilliseconds());//85
 
-// console.log(currentDate.getDay());//4
-// console.log(currentDate.getTime());//1485449772528
-// console.log(currentDate.getTimezoneOffset());//-120
+// console.log(currentDate.getDay());//4 - week starts from sunday, so the result will be from 0(sunday) to 6(saturday); 
+
+// console.log(currentDate.getTime());//1485449772528 - returns milliseconds from 1 january 1970 GMT+0;
+
+// console.log(currentDate.getTimezoneOffset());//-120 - output the difference between local and UTC time in minutes
+
+
+setFullYear(year [, month, date]);
+setMonth(month [, date]);
+setDate(date);
+setHours(hour [, min, sec, ms]);
+setMinutes(min [, sec, ms]);
+setSeconds(sec [, ms]);
+setMilliseconds(ms);
+setTime(milliseconds) - set all date in milliseconds from 01.01.1970 UTC
+
+
 
 // console.log(new Date());// --our date without  Thu Jan 26 2017 18:57:49 GMT+0200 (FLE Standard Time);
 // console.log(new Date().getHours());//18
@@ -73,16 +123,16 @@
 // function test () {
 	// console.log(this);
 // }
-// test(); //Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
+// test(); //Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
 
 // function test () {
-	// console.log(this);//Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
+	// console.log(this);//Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
 	// test2();
 	// function test2() {
-		// console.log(this);//Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
+		// console.log(this);//Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
 	// }
 // }
-// test();//Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
+// test();//Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage, sessionStorage: Storage, webkitStorageInfo: DeprecatedStorageInfo�}
 
 // "use strict"
 // function test () {
@@ -97,7 +147,7 @@
 // function test (arg1, arg2) {
 	// console.log(this);// object {key: value}
 	// if (arg1 || arg2)
-		// console.log(arg1, arg2);// call test
+		// console.log(arg1, arg2);// 'call test'
 	
 // }
 // test();
@@ -106,12 +156,14 @@
 // }
 // obj.method();
 
-// test();
+// test(); // output will be window or undefined
+
+
 // var object = {
 	// key:"value"
 // }
-// test.call(object);
-// test.apply(object);
+// test.call(object);// object {key: "value"};
+// test.apply(object);// object {key: "value"};
 // test.call(object, "call", "test");
 // test.apply(object, ["call", "test"]);
 
@@ -316,6 +368,10 @@ classWorker.addClass("test");
 classWorker.removeClass("rest");
 // myApplication.getModule("adsafsdfasd");
 
+
+function getType(object) {
+	return {}.toString.call(object).slice(8, -1);
+}
 
 function getType(entity) {
 	return {}.toString.call(entity).slice(8, -1);
