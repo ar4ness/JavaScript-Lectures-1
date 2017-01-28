@@ -166,17 +166,17 @@ console.log(testText.replace(/"(.+?)"/g, function (elem) { // "asd", 123, 123
 	}
 }))
 
-console.log(testText.replace(/"(.+?)"/g, 123));
+console.log(testText.replace(/"(.+?)"/g, 123));//123, 123, 123
 
-
+// symbol or | a|b - a or b
 var fileName = "text.txt"
-console.log(fileName.match(/.\w+$/g));
-console.log(fileName.match(/.jpg|png|gif$/g));
+console.log(fileName.match(/.\w+$/g));//[".txt"]
+console.log(fileName.match(/.jpg|png|gif$/g));// null
 
 
 var fileName = "text.png"
 
-console.log(fileName.match(/.jpg|png|gif$/g));
+console.log(fileName.match(/.jpg|png|gif$/g));//['png']
 
 
 
