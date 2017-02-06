@@ -222,6 +222,8 @@
 	});
 	links.on("click", function (event) {
 		event.preventDefault();
+		console.log(this);
+		console.log($(this));
 		links.css("color", $(this).text());
 	});
 	links.filter(".blue").on("click", function() {
@@ -242,11 +244,12 @@
 	// console.log($("li:eq(2)", ul));//1
 	// console.log($("ul li [href='#']"));//1
 	// console.log($("ul li [title]"));//1
-	
+	// console.log($(":text, :radio, :checkbox"));
 	
 	console.log($(":checked"));
 	$(".send").on("click", function () {
 		console.log($(":checked"));;
+		console.log($("[checked]"));;// it is better not to use this form of writing
 	})
 	
 	//selectors
@@ -254,22 +257,23 @@
 	// "ul > .class"
 	// "ul + .class"
 	// "ul ~ .class"
+	
 	// $("ul").prev(); //previous element;
 	// $("ul").next(); //next element;
 	// $("ul li:eq(1)"); $("ul li"):eq(1); // element by index;
 	// $("ul li:first"); $("ul li:last"); // first or last element ;
 	
-	//$("ul li"
+	//$("ul li").first(); $("ul li").last();// first or last element ;
 	
 	// $("ul li:first-child"); $("ul li:last-child"); // first or last element ;
 	// $("ul li:has(span)"); $("ul li").has("span"); // is there such element ;
 	
-// $("ul li[href]");
-    // $("ul li[href="#"]);//find element by attribute
+	// $("ul li[href]");//find element by attribute
+    // $("ul li[href='#']");//find element by attribute with value;
 	
 	
 	// $(":text");
-	// $(":text:radio:checkbox");//get elements with type text
+	// $(":text|radio|checkbox");//get elements with type text
 	// $(":checked") // get all selected/checked elements of form
 	// $(":selected") // get all selected options of form
 	
