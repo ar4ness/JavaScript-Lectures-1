@@ -12,5 +12,45 @@
 			<img class="logo" src="images/logo.png" alt=""/>
 			<span class="text">Base template</span>
 		</h1>
+		 <form>
+		   <div class="formContainer">
+			<div>
+			 <label>Name <input type="text" /></label>
+			</div>
+			<div>
+			 <label>Email <input type="text" /></label>
+			</div>
+			<div>
+			 <label>Phone <input type="text" /></label>
+			</div>
+			<div>
+			 <label><input type="radio" name="userType" />Student</label><br>
+			 <label><input type="radio" name="userType" />Employee</label><br>
+			 <label><input type="radio" name="userType" />Head</label>
+			</div>
+			<div>
+			 <label><input type="checkbox" /> Confirm our rules</label>
+			</div>
+			<button type="submit">Submit</button>
+		   </div>
+		  </form>
 	</body>
 </html>
+
+CSS
+.formContainer {
+ width: 300px;
+ margin: 0 auto;
+}
+.formContainer div {
+ padding: 5px 0;
+}
+.formContainer label, .formContainer input {
+ transition: all 0.5s ease-in-out;
+}
+.formContainer .invalid label {
+ color: red;
+}
+.formContainer .invalid input[type='text'] {
+ border-color: red;
+}
