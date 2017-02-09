@@ -507,14 +507,14 @@ function filterByField(array, field) {
 function findByField(array, field, value) {
 	for (var i = 0; i < array.length; i++) {
 		if (array[i][field] === value) {
-		return array[i];
+			return array[i];
+		}
 	}
 }
-}
 
 
 
-function findByField(array, field, direction) {
+function sortByField(array, field, direction) {
 	if(!array.length)
 		return array;
 	var sortType = getTypeOf(array[0][field]);
@@ -522,13 +522,29 @@ function findByField(array, field, direction) {
 	if(sortType === "String") {
 		sortedArray = sortStrings(array, field, direction);
 	}
+	else if (sortType === "Number" || sortType === "Date") {
+		sortedArray = sortNumbers(array, field, direction);
+	}
+	if (sortedArray) 
+		return direction === "descending" ? sortedArray.reverse() : sortedArray;
+	else 
+		return array;
+	
 }
-function sortStrings() {
-	var sortedArray = array.sort
+function sortStrings(array, field) {
+	return array.sort(function(a, b){
+		var aStr = a[field].toLowerCase(),
+			bStr = b[field].toLowerCase();
+		return aStr > bStr ? 1 : aStr < bStr ? -1 : 0;	
+	});
+	//var sortedArray = array.sort
 }
 
+
 function sortNumbers(array, field) {
-	return array.sort
+	return array.sort(function(a, b) {
+		return a[field] - b[field];
+	}); 
 }
 
 
@@ -538,7 +554,6 @@ function sortNumbers(array, field) {
 	});
 	//Function
 	
-
     function createNumbersStorage() {
 		var newArray = [];
 
@@ -579,16 +594,24 @@ function sortNumbers(array, field) {
         return {
             "addNewUser": function (firstName, lastName, birthDate, id) {
                 //{firstName: "", lastName:"", birthDate: Date(), id: "", friends: ["id1", "id2",…"idN"]}
-                var user =  {firstName: firstName, lastName: lastName, birthDate: birthDate, id: id, friends: []};
-                newArray.push(user);
-				return user;
+                var user =  {
+					firstName: firstName, 
+					lastName: lastName, 
+					birthDate: birthDate, 
+					id: id, 
+					friends: []
+					};
+                //newArray.push(user);
+				return this;
             },
             "removeUserById": function (id) {
             	if(!id){
 					throw "incorrect id"
+				}
+                newArray.forEach(function (item, index, array) {
+					if(item.id === id){
+						array.splice(index,1);
 					}
-                newArray.forEach(function (item, i, array) {
-					if(array[i].id === id){array.splice(i,1);}
                 });
                 return this;
             },
@@ -612,44 +635,54 @@ function sortNumbers(array, field) {
             },
 
             "addFriendId": function (id, friendId) {
-                var counter = 0;
-            	newArray.forEach(function (item, i, array) {
-					if(item.id === friendId){counter++;}
-                });
-                if(!counter){throw "no id in usersStorage"}
-
-				//checking on id repeat
-                newArray.forEach(function (item, i, array) {
-					item["friends"].forEach(function (item, i, array) {if(array[i] === friendId){throw("this user already hav that friend")}})
-                });
-
-                newArray.forEach(function (item, i, array) {
-                    for(var key in array[i]){
-                        if(array[i][key] === searchBy){array[i]["friends"].push(friendId);}
-                    }
-                });
-                return true;
-            },
-            "removeFriendById": function (id, friendId) {
-                newArray.forEach(function (item, i, array) {
-                    for(var key in array[i]){
-                        if(array[i][key] === searchBy){
-                        	array[i]["friends"].forEach(function (item,i,array) {
-                        		if(array[i] === friendId){array.splice(i, 1);}} );
-                        }
-                    }
-                });
-            },
-
-			//repeated code
-			"searchingValueInArray": function(searchBy){
-				var findedUsersArray = newArray.filter(function (item, i, array) {
-					for(var key in array[i]){
-						if(array[i][key] === searchBy){return true;}
+                var user = arrayServices.findByField(newArray, "id", id);
+				if(!user)
+					throw("User is not exist");
+				if (!~user.friends.indexOf(freiendId)) {
+					var isFriendReal = arrayServices.findByField(newArray, "id", friendId);
+					if(isFriendReal) {
+						user.friends.push(friendId);
 					}
-				});
-				return findedUsersArray;
-			},
+					else {
+						throw("Friend Id is not real");
+					}
+				}
+            	
+				// //checking on id repeat
+                // newArray.forEach(function (item, i, array) {
+					// item["friends"].forEach(function (item, i, array) {if(array[i] === friendId){throw("this user already hav that friend")}})
+                // });
+
+                // newArray.forEach(function (item, i, array) {
+                    // for(var key in array[i]){
+                        // if(array[i][key] === searchBy){array[i]["friends"].push(friendId);}
+                    // }
+                // });
+                // return true;
+            },
+			
+            "removeFriendById": function (id, friendId) {
+				var user = arrayServices.findByField(newArray, "id", id);
+				if(!user)
+					throw("User is not exist");
+				var friendIndex = user.friends.indexOf(friendId);
+				if (~friendIndex) {
+					user.friends.splice(friendIndex, 1);
+				};
+			},		
+               
+                
+            
+
+			// //repeated code
+			// "searchingValueInArray": function(searchBy){
+				// var findedUsersArray = newArray.filter(function (item, i, array) {
+					// for(var key in array[i]){
+						// if(array[i][key] === searchBy){return true;}
+					// }
+				// });
+				// return findedUsersArray;
+			// },
 			//array for checking
 			"returnArrOfUsers": function () {
 				return newArray;
@@ -667,7 +700,7 @@ function sortNumbers(array, field) {
 
 
 
-
+//Dima's
 (function (){
 	api.addModule("dataServices",{
 		getDayByDate: getDayByDate,
