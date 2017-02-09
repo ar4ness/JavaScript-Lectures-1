@@ -252,30 +252,43 @@
 		console.log($("[checked]"));;// it is better not to use this form of writing
 	})
 	
-	//selectors
-	// "ul.class #id"
-	// "ul > .class"
-	// "ul + .class"
-	// "ul ~ .class"
+	
+	
+	//------selectors
+	
+	
+	// // // // ($("div") - находит все элементы div на странице )
+	// // // // // ($("ul li") - находит все элементы li  внутри элементов ul);
+	// "ul.class #id";// ($("#sample") - находит первый элемент с id sample. В HTML id уникальные, поэтому считается что с одним id может быть только один элемент) ($(".sample") - находит все элементы с классом sample);
+	// "ul > .class";// ($("a > span") - находит элементы span которые являются непосредственно дочерними элементами тега а )
+	// "ul + .class";// ($("div a + span") - находит элементы а, которые следуют сразу за span внутри  div);
+	// "ul ~ .class"; // ($("div a ~ span") - находит все элементы span, которые находятся на одном уровне с а и следубт за ним внутри div );
 	
 	// $("ul").prev(); //previous element;
 	// $("ul").next(); //next element;
 	// $("ul li:eq(1)"); $("ul li"):eq(1); // element by index;
-	// $("ul li:first"); $("ul li:last"); // first or last element ;
 	
-	//$("ul li").first(); $("ul li").last();// first or last element ;
+	// $("ul li:first"); $("ul li:last"); // first or last element  - находит первый/последний элемент li внутри элементов ul; - работабт с найденными элементами
+	//$("ul li").first(); $("ul li").last();// first or last element - находит первый/последний элемент li внутри элементов ul ;
 	
-	// $("ul li:first-child"); $("ul li:last-child"); // first or last element ;
-	// $("ul li:has(span)"); $("ul li").has("span"); // is there such element ;
+	// $("ul li:first-child"); $("ul li:last-child"); // first or last element ;- находит все элементы li котрые идут первыми/последними внутри элементов ul; - пытаются найти элементыж
+	
+	// $("ul li:eq(n)"); $("ul li").eq(n); //находит все элементы li которые идут с индексом n внутри элементов ul;
+	// $("ul li:has(span)"); $("ul li").has("span"); // is there such element - находит все элементы li в ul внутри которых есть span;
+	// // // $("ul li:not(span)"); $("ul li").not("span"); //  находит все элементы  в li в ul которые не span;
 	
 	// $("ul li[href]");//find element by attribute
     // $("ul li[href='#']");//find element by attribute with value;
 	
 	
 	// $(":text");
-	// $(":text|radio|checkbox");//get elements with type text
-	// $(":checked") // get all selected/checked elements of form
-	// $(":selected") // get all selected options of form
+	// $(":text|radio|checkbox");//get elements with type 'text';
+	// $(":text, :radio, :checkbox, :button, : submit, :reset, :image, :password");// find all elements input or button, which have type = "text|radio|checkbox|button| submit|reset|image|password";
+	
+	//$(":input");// find all elemennts input, select, textarea and button;
+	//$(":focus");// return element which is now in focus;
+	// $(":checked") // get all selected/checked elements checkbox, radio or option of form;
+	// $(":selected") // get all selected in this moment option of form
 	
 	
 	
