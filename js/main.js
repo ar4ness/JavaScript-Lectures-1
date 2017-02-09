@@ -456,17 +456,15 @@
 	
 	
 	function combine(elem1, elem2, stringSeparator) {
-		function getTypeOf(elem1) {
-		return {}.toString.call(elem1).slice(8, -1);
+		var typeOfElement = getTypeOf(elem1);
+		if(typeOfElement === "String" || typeOfElement === "Array") {
+			return !stringSeparator ? elem1.concat(elem2) : elem1(concat stringSeparator, elem2);
+		}else if (typeOfElement && typeOfElement === "Number") {
+			return elem1 + elem2;
+		} else if (typeOfElement === "Object") {
+			return Object.assign({}, elem1, elem2);
 		}
-
-		switch (getTypeOf(elem1)) {
-		case "Array": return elem1.concat(elem2);
-		case "Number": return elem1+elem2;
-		case "String": return elem1 + stringSeparator + elem2;
-		case "Object": return Object.assign({}, elem1, elem2);
-		default: return elem1, elem2;
-		}
+		return [elem1, elem2];
 	}
 
 console.log(combine([1, 2,3], [5, 6]) );//[1, 2, 3, 5, 6]
@@ -474,33 +472,48 @@ console.log(combine(23, 44) );//67
 console.log(combine("here", "is", "|") );// here|is
 //console.log(combine({a: 5}, {b: "10"}) );
 	
-	
 function limitTo(element, limit) {
-	function getTypeOf(element) {
-	return {}.toString.call(element).slice(8, -1);
+	var typeOfElement = getTypeOf(elem1);
+	if(typeOfElement === "String" || typeOfElement === "Array") {
+			return element.slice(0, limit);
+	}else if(isFinite(element) && typeOfElement === "Number") {
+		return element < limit ? element : limit;
+	}return element;
 }
-var start = Math.min.appply(limit);
-var end = Math.max.apply(Math, limit);
-switch (getTypeOf(element)) {
-	case "Array": return element.slice(start, end);
-	case "Number": return ;
-	case "String": return element.slice(start, end);
+
+// // function limitTo(element, limit) {
+	// // function getTypeOf(element) {
+	// // return {}.toString.call(element).slice(8, -1);
+// // }
+// // var start = Math.min.appply(limit);
+// // var end = Math.max.apply(Math, limit);
+// // switch (getTypeOf(element)) {
+	// // case "Array": return element.slice(start, end);
+	// // case "Number": return ;
+	// // case "String": return element.slice(start, end);
 	
-	default: return element;
-	}
-}
+	// // default: return element;
+	// // }
+// // }
 console.log(limitTo("fjdhgjdgfgdj", [1,3,5]))	;
 	
 	//------wrong
+	
+	
+(function () {
+api.addModule("arrayServices", {
+	filterByField : filterByField,
+	findByFiel: findByFiel,
+	sortByField: sortByField
+});
+var newCommonServices = api.getModule("commonServices");
+var getTypeOf = newCommonServices.getTypeOf;
+//functions
 function filterByField(array, field) {
-	function compareField(a, b) {
-		return a.field - b.field;
-	}
-	var newArray = [];
-	newArray.sort(compareField);
-	for (var i = 0; i < newArray.length; i++) {
-		return (newArray[i].field);
-	}
+	function array.filter(function(element) {
+		var currentEl = element[field];
+		return currentEl !== false && currentEl !== null && currentEl !== undefined;
+	)};
 }
 
 //++++++++++++
@@ -547,6 +560,7 @@ function sortNumbers(array, field) {
 	}); 
 }
 
+}) ();
 
 (function(){
     api.addModule("storagesServices", {
