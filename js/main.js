@@ -274,3 +274,185 @@ name, email, phone, один из radio и confirm дожны быть о
 Не хранить ошибки в JS коде, а брать их из атрибута error-text на тэге контейнера.
 
 */
+
+
+
+$(document).ready(function(){
+
+ function validateAndSubmit() {
+  $('div').addClass('invalid');
+  $('label > input').addClass('required');
+  
+  
+
+  jQuery.fn.exists = function() {
+	  return jQuery(this).length;
+  }
+$(function() {
+
+  $('.required').each(function(){
+    // Объявляем переменные (форма и кнопка отправки)
+	var form = $(this),
+        btn = form.find('.btn_submit');
+
+    // Добавляем каждому проверяемому полю, указание что поле пустое
+	form.find('.invalid').addClass('empty_field');
+
+    // Функция проверки полей формы
+    function checkInput(){
+      form.find('.invalid').each(function(){
+		  
+		  
+		else if($(this).is(":checkbox")) {
+			var checkbox = $(this);
+			if(checkbox.is(":checked")) {
+				checkbox.removeClass('empty_field')
+			} else {
+          
+		checkbox.addClass('empty_field');
+		} 
+		} else if($(this).val() != ''){
+          // Если поле не пустое удаляем класс-указание
+		$(this).removeClass('empty_field');
+        } else {
+          // Если поле пустое добавляем класс-указание
+		$(this).addClass('empty_field');
+        }
+		
+      });
+    }
+
+    // Функция подсветки незаполненных полей
+    function lightEmpty(){
+      form.find('.empty_field').css({'border-color':'red'});
+      // Через полсекунды удаляем подсветку
+      setTimeout(function(){
+        form.find('.empty_field').removeAttr('style');
+      },1000);
+    }
+
+    // Проверка в режиме реального времени
+    setInterval(function(){
+      // Запускаем функцию проверки полей на заполненность
+	  checkInput();
+      // Считаем к-во незаполненных полей
+      var sizeEmpty = form.find('.empty_field').length();
+      // Вешаем условие-тригер на кнопку отправки формы
+      if(sizeEmpty > 0){
+        if(btn.hasClass('btn_submit')){
+          return false
+        } else {
+          btn.addClass('btn_submit')
+        }
+      } else {
+        btn.removeClass('btn_submit')
+      }
+    },500);
+
+    // Событие клика по кнопке отправить
+    btn.click(function(){
+      if($(this).hasClass('btn_submit')){
+        // подсвечиваем незаполненные поля и форму не отправляем, если есть незаполненные поля
+		lightEmpty();
+        return false
+      } else {
+        // Все хорошо, все заполнено, отправляем форму
+        form.submit();
+      }
+    });
+  });
+});
+
+})( jQuery );
+  
+  
+  
+  /* Изначально форма не заполнена и по этому считаем что все возможные ошибки есть  */
+var errorNull = true, errorMail = true, errorPass = true;
+
+/* Для удобства и уменьшения размера кода выносим функцию проверки поля на null в отдельную переменную */
+var checkNull = function(){
+  $(this).val($(this).val().trim());
+  if ($(this).val() =="") {
+    /* Выводим сообщение об ошибке под элементом.
+       This в данном случае это элемент, который инициировал вызов функции */
+    $(this).notify("Поле нужно заполнить", "error"); 
+    $(this).addClass("errtextbox");
+    errorNull = true;
+  } else {
+    errorNull = false;
+    $(this).removeClass("errtextbox");
+  }
+};
+
+/* Проверяем значения полей Имя и Информация на null в момент когда они теряют фокус */
+$("#name").focusout(checkNull);
+$("#info").focusout(checkNull);
+  
+  /* Проверка поля Имя на соответствие длинны */
+$("#name").keyup(function(){
+  var value = $(this).val();
+  if (value.length > 24){ 
+    $(this).notify("Максимум 25 символов", "info");
+    $(this).val(value.slice(0,24));
+  }
+});
+
+/* Проверяем корректность E-mail */
+$("#mail").focusout(function(){
+  var value = $(this).val().trim();
+/* Для этого используем регулярное выражение  */
+  if (value.search(/^[a-z0-9]{3,}@mail\.com$/i) != 0) {
+    $(this).notify("E-mail введён не корректно", "error");
+    $(this).addClass("errtextbox");
+    errorMail = true;
+  } else { 
+    $(this).removeClass("errtextbox");
+    errorMail = false;
+  }
+});
+/* В результате клика по кнопке отправить если ошибок заполнения нет то форма отправляется иначе получаем сообщение об ошибке */
+$("#send").click(function(){
+  if (!(errorNull || errorMail || errorPass)) {
+    $("#regForm").submit();
+  } else {
+    alert("Форма пустая или заполнена не корректно", "error");
+  }
+});
+  
+  
+ }
+
+ $('button:submit').on('click', validateAndSubmit);
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
