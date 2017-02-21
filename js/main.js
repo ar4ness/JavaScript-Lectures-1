@@ -230,7 +230,7 @@ function Zoo (cagesAmount, birdCagesAmount) {
 	var cagesAmount = cagesAmount;
 	var birdCagesAmount = birdCagesAmount;
 	var name = name; 
-	
+	var zooClock = new Date();
 	
 	
 	var animalCages = [];
@@ -257,12 +257,13 @@ function Zoo (cagesAmount, birdCagesAmount) {
 	
 	
 	
-	this.feedAnimal = function() {return feedTime;};
+	this.feedAnimal = function(name) {
+		return feedTime;};
 	this.getHungryAnimals = function () {return hungryAnimals ;};
 
 
 }
-
+zoo.addAnimal(Owl);
 
 
 /*Создадим форму, в которой будет 3 text инпута, name, email и phone, 3 radio инпута Student, Employee, Head, 1 checkbox инпут Confirm our rules и один submit button. Перед каждым элементом, кроме submit, должен быть lable с именем поля и каждая пара lable и input должна быть обёрнута в общий контейнер, к примеру div. Для каждого lable и input должен быть стиль для родительского класса invalid, при котором текст lable и бордер инпута(если он текстовый), должны становится красными.
@@ -301,14 +302,11 @@ $(function() {
     // Функция проверки полей формы
     function checkInput(){
       form.find('.invalid').each(function(){
-		  
-		  
 		else if($(this).is(":checkbox")) {
 			var checkbox = $(this);
 			if(checkbox.is(":checked")) {
 				checkbox.removeClass('empty_field')
 			} else {
-          
 		checkbox.addClass('empty_field');
 		} 
 		} else if($(this).val() != ''){
@@ -318,14 +316,13 @@ $(function() {
           // Если поле пустое добавляем класс-указание
 		$(this).addClass('empty_field');
         }
-		
       });
     }
 
     // Функция подсветки незаполненных полей
     function lightEmpty(){
       form.find('.empty_field').css({'border-color':'red'});
-      // Через полсекунды удаляем подсветку
+      // Через секунды удаляем подсветку
       setTimeout(function(){
         form.find('.empty_field').removeAttr('style');
       },1000);
@@ -363,7 +360,7 @@ $(function() {
   });
 });
 
-})( jQuery );
+});
   
   
   
