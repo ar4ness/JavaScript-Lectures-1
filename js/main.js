@@ -1,3 +1,8 @@
+//=======Manipulations with attributes=====
+/*$([selector]).data([attributeName], [value]); // Возвращает значение data атрибута первого выбранного элемента или задаёт всем выбранным элементам значение указанного атрибута. Метод, может принимать параметром объект чтобы установить значение сразу нескольких свойств.Пример:<div data-test="test"></div>$("div").data("test"); // "test"$("div").data("test", "rest"); // "test"$("div").data("test"); // "rest"*/
+
+
+
 var dataElem = $("[data-test]");
 // console.log(dataElem.data("test"));//test value
 // console.log(dataElem.data("test2"));//test value2
@@ -14,6 +19,10 @@ var dataElem = $("[data-test]");
 
 // dataElem.data("test2", {"isValid":true});
 // console.log(dataElem.data("test2"));//Object {isValid: true}
+
+/*$([selector]).removeData([attributeName(s)]); // Удаляет data атрибут(ы). Аргументом могут быть строка, массив или строка из нескольких значений разделённых запятой.
+<!> removeData удаляет только DOM значение, но не удаляет сам атрибут. Поэтому после удаления метод data всё равно вернёт значение HTML атрибута. Чтобы исправить ситуацию атрибут нужно удалить используя метод removeAttr.
+*/
 
 // dataElem.removeData("test2");
 // console.log(dataElem.data("test2"));//test value 2
@@ -32,6 +41,13 @@ var dataElem = $("[data-test]");
 
 
 //==========manipulation with styles====
+
+/*$([selector]).css([styleName(s)]); // Возвращает значение выбранного CSS свойства или массива свойств.
+$([selector]).css([styleName], [value]); // Задаёт значение указанного свойства.
+$([selector]).css([properties]); // Задаёт значения свойств через объект, в формате ключ значение.
+$([selector]).height([value]); $([selector]).weight([value]); // Возвращают ширину или высоту первого элемента, возвращают число пикселей, или указывают их, принимают любые единицы либо число пикселей.
+$([selector]).innerWidth([value]); $([selector]).innerHeight([value]);  // Возвращают ширину или высоту первого элемента включая его паддинги или указывают их, принимают любые единицы,  число пикселей или функцию которая принимает index и width/height и  должна вернуть новое значение width/height.Пример:<div style="width:50px; padding: 10px;"></div>$("div").innerWidth() // 70$("div").innerWidth(50) // <div style="width:30px; padding: 10px;"></div>
+*/
 
  var logoImage = $(".logo");
 // console.log(logoImage.css("width")); //100px- string;
@@ -66,13 +82,16 @@ var dataElem = $("[data-test]");
 // console.log(logoImage.css("width"));//160px - string
 // console.log(logoImage.width());//160
 
-// //====innerWidth and innerHeight - works same
+// //=========innerWidth and innerHeight - works same
 // console.log(logoImage.innerWidth());//180;
 // logoImage.innerWidth(200);
 // console.log(logoImage.width());//180
 // console.log(logoImage.innerWidth());//200
 
-// //====outerWidth and outerHeight - works same
+// //==========outerWidth and outerHeight - works same
+
+/*$([selector]).outerWidth([value]); $([selector]).outerHeight([value]);  // Возвращают ширину или высоту первого элемента включая его паддинги, бордеры и(опционально) маржины или указывают их, принимая любые единицы,  число пикселей или функцию которая принимает index и width/height и  должна вернуть новое значение width/height. Пример: <div style="width:50px; padding: 10px; border: 5px solid red; margin: 5px;"></div> $("div").outerWidth() // 80$("div").outerWidth(true) // 90  $("div").outerWidth(50) // <div style="width:20px; padding: 10px; border: 5px solid red; margin: 5px;"></div>$("div").outerWidth(50, true) // <div style="width:10px; padding: 10px; border: 5px solid red; margin: 5px;"></div>
+*/
 // console.log(logoImage.outerWidth());//210 = width + border +padding
 // console.log(logoImage.outerWidth(true));//210+margin=226 - it is all width of block
 
@@ -83,6 +102,11 @@ var dataElem = $("[data-test]");
 
 
 ////===positioning
+
+/*$([selector]).offset([position]);  // Возвращает позицию первого элемента относительно документа или указывает её. Метод принимает и возвращает объект формата {"left": "", "top": ""}; В случае, если функция используется как сеттер и свойство position элемента равно static, оно будет изменено на relative.
+$([selector]).position();  // Возвращает позицию первого элемента относительно offsetParent. Метод возвращает объект формата {"left": "", "top": ""};
+$([selector]).scrollLeft([position]); $([selector]).scrollTop([position]); // Возвращает позицию полосы прокрутки первого элемента выборки или устанавливает её для всех элементов выборки. Принимает и возвращает число пикселей.
+*/
 
 // console.log(logoImage.offset());//Object {top: 129.4375, left: 343.984375}
 // console.log(logoImage.position());//Object {top: 0, left: 327.984375}
