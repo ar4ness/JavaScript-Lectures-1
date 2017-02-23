@@ -258,6 +258,9 @@ function Zoo (cagesAmount, birdCagesAmount) {
 	
 	
 	this.feedAnimal = function(name) {
+		for (this.name in animalCages || this.name in birdCages) {
+			
+		}
 		return feedTime;};
 	this.getHungryAnimals = function () {return hungryAnimals ;};
 
