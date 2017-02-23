@@ -176,12 +176,19 @@ var $test = $(".jqueryTestContainer");
 // $("ul", $test).on("click", function () { alert('safdgfa')});
 // $("h5", $test).replaceWith($('ul', $test).clone());
 
-$('ul', $test).clone().replaceAll($("h5", $test));
+// $('ul', $test).clone().replaceAll($("h5", $test));
 
 
+// $("li, span", $test).each(function (index, element) {
+	// console.log(index, element);
+// });
 
-
-
+// console.log("index", $("li").index());
+// console.log("index", $("li").eq(1).index());
+console.log($("li.first").index());//0
+console.log($("li.second").index());//1
+console.log($("h5").index());//5
+console.log($("gfiuyggfd").index());//-1 if no element found
 
 
 
