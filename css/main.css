@@ -8,3 +8,60 @@
 .mainTitle .text {
 	vertical-align:middle;
 }
+
+
+.todo-list {
+	overflow: hidden;
+	width: 70%;
+	margin: 0 auto;
+}
+.todo-list .usersManagement, .todo-list .tasksManagement {
+	float: left;
+	width: 40%;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	margin: 5%;
+	padding: 10px;
+}
+.todo-list. addUser input, .todo-list .addTask input {
+	display: block;
+	margin: 0 0 5px;
+}
+
+.todo-list input[type="text"], .todo-list textarea {
+	width: 100%
+}
+
+.todo-list p, .todo-list h2 {
+	padding: 0 0 5px;
+	margin: 0;
+}
+.todo-list ul {
+	padding: 0;
+	margin: 0;
+}
+.todo-list li {
+	list-style: none;
+	padding: 5px;
+	margin: 5px;
+	border: 2px solid #ccc;
+}
+
+.todo-list .users label {
+	display: block;
+	padding: 0 0 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
