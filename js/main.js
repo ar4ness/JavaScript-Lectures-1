@@ -224,49 +224,160 @@ console.log(Owl.coverDistance(100));//1.11111sec
 //-----exercize 3
 /*Написать конструктор Zoo, который вызывается с параметрами сagesAmount и birdCagesAmount и методами addAnimal, который будет добавлять животное в одну из клеток, для птиц или для обычных животных в зависимости от того какое это животное, а если клеток не достаточно то возвращать ошибку(в качестве животных используются экземпляры классов Animal и Bird), feedAnimal который будет кормить животное по имени и сохранять время кормления и getHungryAnimals, который возвращает список имён голодных животных, животное считает голодным, если со времени последнего кормления прошло 4 часа. Работа со временем осуществляется использую часы зоопарка, при создании в них устанавливается текущее время, которое можно изменить используя метод класса Zoo, setClockTime, который принимает часы и минуты. 
 */
-function Zoo (cagesAmount, birdCagesAmount) {
-	Animal.apply(this, arguments);
-	Bird.apply(this, arguments);
-	var cagesAmount = cagesAmount;
-	var birdCagesAmount = birdCagesAmount;
-	var name = name; 
-	var zooClock = new Date();
+ // function Zoo (cagesAmount, birdCagesAmount) {
+	// Animal.apply(this, arguments);
+	// Bird.apply(this, arguments);
+	// var cagesAmount = cagesAmount;
+	// var birdCagesAmount = birdCagesAmount;
+	// var name = name; 
+	// var zooClock = new Date();
 	
 	
-	var animalCages = [];
-	animalCages.length = cagesAmount;
-	var birdCages = [];
-	birdCages.length = birdCagesAmount;
+	// var animalCages = [];
+	// animalCages.length = cagesAmount;
+	// var birdCages = [];
+	// birdCages.length = birdCagesAmount;
 	
-	this.addAnimal = function(newAnimal) {
-		if(newAnimal!==undefined){
-			if (newAnimal.type == "bird") {
-				if 	(birdCages[i] <= birdCages.length) {
-					return birdCages.push[];
-				}
-				else {return "there is no more free cages left"};
-			} else if (newAnimal.type !== "bird") {
-				if 	(animalCages[i] <= animalCages.length-1) {
-					return animalCages.push[];
-				}
-				else {return "there is no more free cages left"};
-				};
+	// this.addAnimal = function(newAnimal) {
+		// if(newAnimal!==undefined){
+			// if (newAnimal.type == "bird") {
+				// if 	(birdCages[i] <= birdCages.length) {
+					// return birdCages.push[];
+				// }
+				// else {return "there is no more free cages left"};
+			// } else if (newAnimal.type !== "bird") {
+				// if 	(animalCages[i] <= animalCages.length-1) {
+					// return animalCages.push[];
+				// }
+				// else {return "there is no more free cages left"};
+				// };
 				
-			}else {throw "There is no such animal"};
-	}	
+			// }else {throw "There is no such animal"};
+	// }	
 	
 	
 	
-	this.feedAnimal = function(name) {
-		for (this.name in animalCages || this.name in birdCages) {
+	// this.feedAnimal = function(name) {
+		// for (this.name in animalCages || this.name in birdCages) {
 			
-		}
-		return feedTime;};
-	this.getHungryAnimals = function () {return hungryAnimals ;};
+		// }
+		// return feedTime;};
+	// this.getHungryAnimals = function () {return hungryAnimals ;};
 
 
+// }
+// Zoo.addAnimal(Owl);
+
+
+function Zoo(cagesAmount, birdCagesAmount) {
+	this._cagesAmount = cagesAmount;
+	this._birdCagesAmount = birdCagesAmount;
+	this._allAnimal = [];
+	this._allBirds = [];
+	this._zooClock = new Date();
 }
-zoo.addAnimal(Owl);
+Zoo.prototype = {
+	setClockTime: function (hour, minute) {
+		this._zooClock.setHours(hours, minute);
+	},
+	
+	addAnimal: function (newAnimal) {
+	newAnimal._time = new Date(2017,0,0);
+		if(newAnimal instanceof Bird) {
+			if (this._allBird.length < this._birdCagesAmount) {
+				this._allBird.push(newAnimal);
+			} else {
+				throw "There's no free birdcage";
+			}
+		} else if (newAnimal instanceof Animal) {
+			if (this._allAnimal.length < this._cagesAmount) {
+				this._allAnimal.push(newAnimal);
+			}
+		}	else {
+			throw "There's no free animal cage";
+		}
+	},
+	feedAnimal: function (name) {
+		for (var i=0; i < this._allAnimal.length; i++) {
+			if (this._allAnimal[i]._name == name) {
+				this._allAnimal[i]._feedTime = new Date();
+			}
+		}
+		for (var i=0; i < this._allBirds.length; i++) {
+			if (this._allBirds[i]._name == name) {
+				this._allBirds[i]._feedTime = new Date();
+			}
+		}
+	},
+	getHungryAnimal: function () {
+		var hungryAnimals = [];
+		for (var i=0; i < this._allAnimal.length; i++) {
+			if (this._zooClock - this._allAnimal[i]._feedTime >= 14400000) {
+				hungryAnimals.push(this._allAnimal[i]._name);
+			}
+		}
+		for (var i=0; i < this._allBirds.length; i++) {
+			if (this._zooClock - this._allBirds[i]._feedTime >= 14400000) {
+				hungryAnimals.push(this._allBirds[i]._name);
+			}
+		}
+		return hungryAnimals.join(', ')
+	}
+}
+
+
+function Zoo(cagesAmount, birdCagesAmount) {
+	var cagesAmount = cagesAmount,
+		birdCagesAmount = birdCagesAmount,
+		clockTime = new Date(),
+		allAnimals = [];
+		
+		this.addAnimal = function(animal) {
+			if(animal) {
+				if(animal instanceof Bird) {
+					if(birdCagesAmount > 0) {
+						birdCagesAmount--;
+					}else{
+						throw "There's no free cages for birds!"
+					}
+				}else {
+					if(cagesAmount > 0) {
+						cagesAmount--;
+					} else {
+						throw "There's no free cages for animal!"
+					}
+				}
+			}else {
+				throw "Add animal";
+			}
+			allAnimals.push(animal);
+			this.feedAnimal(animal.getName());
+		};
+		this.feedAnimal = function(name) {
+			for(var i=0; i < allAnimals.length; i++) {
+				if(allAnimals[i].getName() === name) {
+					allAnimals[i].feedTime = clockTime;
+					break;
+				}
+				if(i === allAnimals.length-1) {
+					throw ("there's no animal named" + name + "in Zoo!");
+				}
+			}
+		};
+		this.getHungryAnimal = function() {
+			return allAnimals.reduce(function(animalsName, animal) {
+				if ((clockTime - animal.feedTime) / (1000*60*60) >4) {
+					animalsName.push(animal.getName());
+				}
+				return animalsName;
+			
+			}, []);
+		};
+		this.setClockTime = function(hh,mm) {
+			clockTime = new Date().setHours(hh, mm);
+		};
+};
+
 
 
 /*Создадим форму, в которой будет 3 text инпута, name, email и phone, 3 radio инпута Student, Employee, Head, 1 checkbox инпут Confirm our rules и один submit button. Перед каждым элементом, кроме submit, должен быть lable с именем поля и каждая пара lable и input должна быть обёрнута в общий контейнер, к примеру div. Для каждого lable и input должен быть стиль для родительского класса invalid, при котором текст lable и бордер инпута(если он текстовый), должны становится красными.
@@ -281,155 +392,397 @@ name, email, phone, один из radio и confirm дожны быть о
 
 
 
-$(document).ready(function(){
+// // // $(document).ready(function(){
 
- function validateAndSubmit() {
-  $('div').addClass('invalid');
-  $('label > input').addClass('required');
+ // // // function validateAndSubmit() {
+  // // // $('div').addClass('invalid');
+  // // // $('label > input').addClass('required');
   
   
 
-  jQuery.fn.exists = function() {
-	  return jQuery(this).length;
-  }
-$(function() {
+  // // // jQuery.fn.exists = function() {
+	  // // // return jQuery(this).length;
+  // // // }
+// // // $(function() {
 
-  $('.required').each(function(){
-    // Объявляем переменные (форма и кнопка отправки)
-	var form = $(this),
-        btn = form.find('.btn_submit');
+  // // // $('.required').each(function(){
+    // // // // Объявляем переменные (форма и кнопка отправки)
+	// // // var form = $(this),
+        // // // btn = form.find('.btn_submit');
 
-    // Добавляем каждому проверяемому полю, указание что поле пустое
-	form.find('.invalid').addClass('empty_field');
+    // // // // Добавляем каждому проверяемому полю, указание что поле пустое
+	// // // form.find('.invalid').addClass('empty_field');
 
-    // Функция проверки полей формы
-    function checkInput(){
-      form.find('.invalid').each(function(){
-		else if($(this).is(":checkbox")) {
-			var checkbox = $(this);
-			if(checkbox.is(":checked")) {
-				checkbox.removeClass('empty_field')
+    // // // // Функция проверки полей формы
+    // // // function checkInput(){
+      // // // form.find('.invalid').each(function(){
+		// // // else if($(this).is(":checkbox")) {
+			// // // var checkbox = $(this);
+			// // // if(checkbox.is(":checked")) {
+				// // // checkbox.removeClass('empty_field')
+			// // // } else {
+		// // // checkbox.addClass('empty_field');
+		// // // } 
+		// // // } else if($(this).val() != ''){
+          // // // // Если поле не пустое удаляем класс-указание
+		// // // $(this).removeClass('empty_field');
+        // // // } else {
+          // // // // Если поле пустое добавляем класс-указание
+		// // // $(this).addClass('empty_field');
+        // // // }
+      // // // });
+    // // // }
+
+    // // // // Функция подсветки незаполненных полей
+    // // // function lightEmpty(){
+      // // // form.find('.empty_field').css({'border-color':'red'});
+      // // // // Через секунды удаляем подсветку
+      // // // setTimeout(function(){
+        // // // form.find('.empty_field').removeAttr('style');
+      // // // },1000);
+    // // // }
+
+    // // // // Проверка в режиме реального времени
+    // // // setInterval(function(){
+      // // // // Запускаем функцию проверки полей на заполненность
+	  // // // checkInput();
+      // // // // Считаем к-во незаполненных полей
+      // // // var sizeEmpty = form.find('.empty_field').length();
+      // // // // Вешаем условие-тригер на кнопку отправки формы
+      // // // if(sizeEmpty > 0){
+        // // // if(btn.hasClass('btn_submit')){
+          // // // return false
+        // // // } else {
+          // // // btn.addClass('btn_submit')
+        // // // }
+      // // // } else {
+        // // // btn.removeClass('btn_submit')
+      // // // }
+    // // // },500);
+
+    // // // // Событие клика по кнопке отправить
+    // // // btn.click(function(){
+      // // // if($(this).hasClass('btn_submit')){
+        // // // // подсвечиваем незаполненные поля и форму не отправляем, если есть незаполненные поля
+		// // // lightEmpty();
+        // // // return false
+      // // // } else {
+        // // // // Все хорошо, все заполнено, отправляем форму
+        // // // form.submit();
+      // // // }
+    // // // });
+  // // // });
+// // // });
+
+// // // });
+  
+  
+  
+  // // // /* Изначально форма не заполнена и по этому считаем что все возможные ошибки есть  */
+// // // var errorNull = true, errorMail = true, errorPass = true;
+
+// // // /* Для удобства и уменьшения размера кода выносим функцию проверки поля на null в отдельную переменную */
+// // // var checkNull = function(){
+  // // // $(this).val($(this).val().trim());
+  // // // if ($(this).val() =="") {
+    // // // /* Выводим сообщение об ошибке под элементом.
+       // // // This в данном случае это элемент, который инициировал вызов функции */
+    // // // $(this).notify("Поле нужно заполнить", "error"); 
+    // // // $(this).addClass("errtextbox");
+    // // // errorNull = true;
+  // // // } else {
+    // // // errorNull = false;
+    // // // $(this).removeClass("errtextbox");
+  // // // }
+// // // };
+
+// // // /* Проверяем значения полей Имя и Информация на null в момент когда они теряют фокус */
+// // // $("#name").focusout(checkNull);
+// // // $("#info").focusout(checkNull);
+  
+  // // // /* Проверка поля Имя на соответствие длинны */
+// // // $("#name").keyup(function(){
+  // // // var value = $(this).val();
+  // // // if (value.length > 24){ 
+    // // // $(this).notify("Максимум 25 символов", "info");
+    // // // $(this).val(value.slice(0,24));
+  // // // }
+// // // });
+
+// // // /* Проверяем корректность E-mail */
+// // // $("#mail").focusout(function(){
+  // // // var value = $(this).val().trim();
+// // // /* Для этого используем регулярное выражение  */
+  // // // if (value.search(/^[a-z0-9]{3,}@mail\.com$/i) != 0) {
+    // // // $(this).notify("E-mail введён не корректно", "error");
+    // // // $(this).addClass("errtextbox");
+    // // // errorMail = true;
+  // // // } else { 
+    // // // $(this).removeClass("errtextbox");
+    // // // errorMail = false;
+  // // // }
+// // // });
+// // // /* В результате клика по кнопке отправить если ошибок заполнения нет то форма отправляется иначе получаем сообщение об ошибке */
+// // // $("#send").click(function(){
+  // // // if (!(errorNull || errorMail || errorPass)) {
+    // // // $("#regForm").submit();
+  // // // } else {
+    // // // alert("Форма пустая или заполнена не корректно", "error");
+  // // // }
+// // // });
+  
+  
+ // // // }
+
+ // // // $('button:submit').on('click', validateAndSubmit);
+
+// // // });
+
+
+
+
+
+ $(function () {
+	var textInputs = $(":text");
+	var radios = $(":radio");
+	var checkbox = $(":checkbox");
+	
+	function checkInput(){
+		var formValid = true;
+		textInputs.each(function(){
+			if($(this).val() != ''){
+				$(this).parent().removeClass('invalid');
+				model[$(this).attr("name")] = $(this).val();
 			} else {
-		checkbox.addClass('empty_field');
-		} 
-		} else if($(this).val() != ''){
-          // Если поле не пустое удаляем класс-указание
-		$(this).removeClass('empty_field');
-        } else {
-          // Если поле пустое добавляем класс-указание
-		$(this).addClass('empty_field');
-        }
-      });
-    }
+				$(this).parent().addClass('invalid');
+				formValid = false;
+			}
+		});
 
-    // Функция подсветки незаполненных полей
-    function lightEmpty(){
-      form.find('.empty_field').css({'border-color':'red'});
-      // Через секунды удаляем подсветку
-      setTimeout(function(){
-        form.find('.empty_field').removeAttr('style');
-      },1000);
-    }
+		var checked = false;
+		var checkedRadio = radios.filter(":checked");
+		
+			if(checkedRadio.length){
+				
+				model.type = $(checkedRadio).val();
+				checked = true;
+			};
+			
+		if(checked){
+			$(":radio").parent().parent().removeClass("invalid");
+		} else {
+			$(":radio").parent().parent().addClass("invalid");
+			formValid = false;
+		}
 
-    // Проверка в режиме реального времени
-    setInterval(function(){
-      // Запускаем функцию проверки полей на заполненность
-	  checkInput();
-      // Считаем к-во незаполненных полей
-      var sizeEmpty = form.find('.empty_field').length();
-      // Вешаем условие-тригер на кнопку отправки формы
-      if(sizeEmpty > 0){
-        if(btn.hasClass('btn_submit')){
-          return false
-        } else {
-          btn.addClass('btn_submit')
-        }
-      } else {
-        btn.removeClass('btn_submit')
-      }
-    },500);
+		if (checkbox.is(":checked")){
+			model.confirmed = true;
+			$(":checkbox").parent().removeClass('invalid');
+		}else{
+			$(":checkbox").parent().addClass('invalid');
+			formValid = false;
+		}
+		return formValid;
+	};
 
-    // Событие клика по кнопке отправить
-    btn.click(function(){
-      if($(this).hasClass('btn_submit')){
-        // подсвечиваем незаполненные поля и форму не отправляем, если есть незаполненные поля
-		lightEmpty();
-        return false
-      } else {
-        // Все хорошо, все заполнено, отправляем форму
-        form.submit();
-      }
-    });
-  });
-});
+	var form = $(".formContainer");
+	var model = {
+		name: "",
+		email: "",
+		phone: "",
+		type: "",
+		confirmed: true
+	}
 
-});
-  
-  
-  
-  /* Изначально форма не заполнена и по этому считаем что все возможные ошибки есть  */
-var errorNull = true, errorMail = true, errorPass = true;
-
-/* Для удобства и уменьшения размера кода выносим функцию проверки поля на null в отдельную переменную */
-var checkNull = function(){
-  $(this).val($(this).val().trim());
-  if ($(this).val() =="") {
-    /* Выводим сообщение об ошибке под элементом.
-       This в данном случае это элемент, который инициировал вызов функции */
-    $(this).notify("Поле нужно заполнить", "error"); 
-    $(this).addClass("errtextbox");
-    errorNull = true;
-  } else {
-    errorNull = false;
-    $(this).removeClass("errtextbox");
-  }
-};
-
-/* Проверяем значения полей Имя и Информация на null в момент когда они теряют фокус */
-$("#name").focusout(checkNull);
-$("#info").focusout(checkNull);
-  
-  /* Проверка поля Имя на соответствие длинны */
-$("#name").keyup(function(){
-  var value = $(this).val();
-  if (value.length > 24){ 
-    $(this).notify("Максимум 25 символов", "info");
-    $(this).val(value.slice(0,24));
-  }
-});
-
-/* Проверяем корректность E-mail */
-$("#mail").focusout(function(){
-  var value = $(this).val().trim();
-/* Для этого используем регулярное выражение  */
-  if (value.search(/^[a-z0-9]{3,}@mail\.com$/i) != 0) {
-    $(this).notify("E-mail введён не корректно", "error");
-    $(this).addClass("errtextbox");
-    errorMail = true;
-  } else { 
-    $(this).removeClass("errtextbox");
-    errorMail = false;
-  }
-});
-/* В результате клика по кнопке отправить если ошибок заполнения нет то форма отправляется иначе получаем сообщение об ошибке */
-$("#send").click(function(){
-  if (!(errorNull || errorMail || errorPass)) {
-    $("#regForm").submit();
-  } else {
-    alert("Форма пустая или заполнена не корректно", "error");
-  }
-});
-  
-  
- }
-
- $('button:submit').on('click', validateAndSubmit);
-
+	
+	$("button:submit").on("click", function(event){
+				
+		event.preventDefault();
+		if(checkInput()){
+			form.submit(model);
+			console.log(model);
+			// alert("Success!");
+			} else {
+				// alert("Please, fill the form.");
+			}
+	});
+	
 });
 
 
 
 
+
+
+
+
+//==========================================================================
+
+(function ($) {
+
+	var form = $(".formContainer");
+	var model = {
+		name: "",
+		email: "",
+		phone: "",
+		type: "",
+		confirmed: true
+	}
+
+	function isNotEmpty (str) {
+		return str !== '';
+	}
+
+	function checkEmail (email) {
+		return /^\w+@\w+\.{1}\w{2,}$/.test(email);
+	}
+
+	function checkPhone (phone) {
+		return  /^\+\d{2}\(\d{3}\)\d{3}-\d{2}-\d{2}$/.test(phone);
+	}
+
+	function checkInput(){
+		var formValid = true;
+
+		var nameForm = $("input[name = 'name']").val();
+		var emailForm = $("input[name = 'email']").val();
+		var phoneForm = $("input[name = 'phone']").val();
+
+		if(isNotEmpty(nameForm)) {
+			model.name = nameForm;
+			$("input[name='name']").parent().removeClass('invalid');
+		} else {
+			$("input[name='name']").parent().addClass('invalid');
+			formValid = false;
+		}
+
+		if(isNotEmpty(emailForm) && checkEmail(emailForm)){
+			model.email = emailForm;
+			$("input[name='email']").parent().removeClass('invalid');
+		} else {
+			$("input[name='email']").parent().addClass('invalid');
+			formValid = false;
+		}
+
+		if(isNotEmpty(phoneForm) && checkPhone(phoneForm)){
+			model.phone = phoneForm;
+			$("input[name='phone']").parent().removeClass('invalid');
+		} else {
+			$("input[name='phone']").parent().addClass('invalid');
+			formValid = false;
+		}
+
+		var checked = false;
+		form.find(":radio").each(function(){
+			if($(this).prop("checked")){
+				checked = true;
+				model.type = $(this).val();
+			}
+		});
+		
+		if(checked){
+			$(":radio").parent().parent().removeClass("invalid");
+		} else {
+			$(":radio").parent().parent().addClass("invalid");
+			formValid = false;
+		}
+
+		if (form.find(":checkbox").prop("checked")){
+			model.confirmed = true;
+			$(":checkbox").parent().removeClass('invalid');
+		}else{
+			$(":checkbox").parent().addClass('invalid');
+			formValid = false;
+		}
+		return formValid;
+	};
+
+
+	$(document).ready(function () {
+
+		var pushedSubmit = false;
+		
+			$("button:submit").on("click", function(event){
+				pushedSubmit = true;
+				event.preventDefault();
+				if(checkInput()){
+					console.log(model);
+					// alert("Success!");
+
+					} else {
+						// alert("Please, fill the form.");
+					}
+			});
+
+				$("input[name = 'name']").on("change", function(event){
+					if (pushedSubmit){
+						if(isNotEmpty($("input[name = 'name']").val())) {
+							model.name = $("input[name = 'name']").val() ;
+							$("input[name='name']").parent().removeClass('invalid');
+						} else {
+							$("input[name='name']").parent().addClass('invalid');
+						}
+					} else {
+						return false;
+					}
+				});
+				
+				$("input[name = 'email']").on("change", function(event){
+					if (pushedSubmit){
+						if(!isNotEmpty($("input[name = 'email']").val())) {
+							alert($("input[name = 'email']").attr("required-error"));
+							$("input[name='email']").parent().addClass('invalid');
+						} else if (!checkEmail($("input[name = 'email']").val())) {	
+							alert($("input[name = 'email']").attr("validation-error"));
+							$("input[name='email']").parent().addClass('invalid');
+						} else {
+							$("input[name='email']").parent().removeClass('invalid');
+						}
+					}
+				});
+				
+				$("input[name = 'phone']").on("change", function(event){
+					if (pushedSubmit){
+						if(isNotEmpty($("input[name = 'phone']").val()) &&
+							checkPhone($("input[name = 'phone']").val())) {
+							model.phone = $("input[name = 'phone']").val() ;
+							$("input[name='phone']").parent().removeClass('invalid');
+						} else {
+							$("input[name='phone']").parent().addClass('invalid');
+						}
+					} else {
+						return false;
+					}
+				});
+				
+				
+				$(":radio").on("change", function(event){
+					if (pushedSubmit){
+						if ($(":radio:checked").length){
+							model.type = $(":radio:checked").val();
+							$(":radio").parent().parent().removeClass('invalid');
+						}else{
+							$(":radio").parent().parent().addClass('invalid');
+						}
+					}
+				});
+				
+				
+				$(":checkbox").on("change", function(event){
+					if (pushedSubmit){
+						if ($(":checkbox").prop("checked")){
+							model.confirmed = true;
+							$(":checkbox").parent().removeClass('invalid');
+						}else{
+							$(":checkbox").parent().addClass('invalid');
+						}
+					}
+				});
+				
+				
+
+		});
+})(jQuery);
 
 
 

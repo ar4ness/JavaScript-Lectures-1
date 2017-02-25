@@ -10,23 +10,23 @@
 		<!-- This is base template for testing -->
 		<h1 class="mainTitle">
 			<img class="logo" src="images/logo.png" alt=""/>
-			<span class="text">Base template</span>
+			<span class="text">Lecture 14 practice</span>
 		</h1>
 		 <form>
 		   <div class="formContainer">
 			<div>
-			 <label>Name <input type="text" /></label>
+			 <label>Name <input type="text" name="name"/></label>
 			</div>
 			<div>
-			 <label>Email <input type="text" /></label>
+			 <label>Email <input type="text" name="email" required-error="This field is required" validation-error="Email is not valid"/></label>
 			</div>
 			<div>
-			 <label>Phone <input type="text" /></label>
+			 <label>Phone <input type="text" name="phone"/></label>
 			</div>
 			<div>
-			 <label><input type="radio" name="userType" />Student</label><br>
-			 <label><input type="radio" name="userType" />Employee</label><br>
-			 <label><input type="radio" name="userType" />Head</label>
+			 <label><input type="radio" name="userType" value="stedent"/>Student</label><br>
+			 <label><input type="radio" name="userType" value="employee" />Employee</label><br>
+			 <label><input type="radio" name="userType" value="head"/>Head</label>
 			</div>
 			<div>
 			 <label><input type="checkbox" /> Confirm our rules</label>
