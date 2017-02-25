@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Base template</title>
+		<title>Lecture 17</title>
 		<link type="text/css" rel="stylesheet" media="all" href="css/main.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="js/main.js" defer></script>
@@ -10,7 +10,51 @@
 		<!-- This is base template for testing -->
 		<h1 class="mainTitle">
 			<img class="logo" src="images/logo.png" alt=""/>
-			<span class="text">Base template</span>
+			<span class="text">Lecture 17 practice jQuery</span>
 		</h1>
+		
+		<div class="todo-list">
+			<div class="usersManagement">
+				<div class="addUser">
+					<input type="text" placeholder="User name" class="userName" />
+					<input type="text" placeholder="User email" class="userEmail" />
+					<input type="button" value="Add user" />
+				</div>
+				<ul class="users">
+					<li>
+						<p class="userName"></p>
+						<p class="userEmail"></p>
+						
+						<label>Assigned<input type="checkbox" /></label>
+						<button type="button">Delete user</button>
+					</li>
+				</ul>
+			</div>
+		
+			<div class="tasksManagement">
+				<div class="addTask">
+					<input type="text" placeholder="Task title" />
+					<textarea placeholder="Task description"></textarea>
+					<input type="text" placeholder="Task ID" />
+					<input type="button" value="Add task" />
+				</div>
+				<ul class="tasks">
+					<li>
+						<h2 class="taskTitle"></h2>
+						<p>Create date
+							<span class="createDate">date/month/year hours:minutes</span>
+						</p>
+						<p class="taskDescription"></p>
+						<p>Assigned to <span></span> users</p>
+						<div>
+							<button type="button">Move top</button>
+							<button type="button">Move bottom</button>
+							<button type="button">Delete task</button>
+						</div>
+						<button type="button" class="complete">Complete task</button>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</body>
 </html>
