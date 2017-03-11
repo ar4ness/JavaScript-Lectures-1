@@ -23,7 +23,7 @@
 	margin: 5%;
 	padding: 10px;
 }
-.todo-list. addUser input, .todo-list .addTask input {
+.todo-list .addUser input, .todo-list .addTask input {
 	display: block;
 	margin: 0 0 5px;
 }
@@ -43,7 +43,7 @@
 .todo-list li {
 	list-style: none;
 	padding: 5px;
-	margin: 5px;
+	margin: 5px 0;
 	border: 2px solid #ccc;
 }
 
@@ -52,10 +52,19 @@
 	padding: 0 0 5px;
 }
 
+.todo-list .complete-btn {
+	margin: 5px 0 0;
+}
+.todo-list .complete {
+	background: #adffa2;
+}
+.todo-list .active {
+	background: rgba(181, 197, 197, 0.92);
+}
 
-
-
-
+.invalid {
+	color: red;
+}
 
 
 

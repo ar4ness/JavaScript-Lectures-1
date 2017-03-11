@@ -13,7 +13,6 @@
 Сделать drag and drop задач используя события mousedown и mouseup.
 Добавить перед списком задач кнопку sort by date и при нажатии на неё перестраивать список задач в порядке даты создания.
 Добавить перед списком пользователей кнопку sort by name и при нажатии на неё перестраивать список пользователей по имени в алфавитном порядке.
-
 */
 
 var users = [];
@@ -25,8 +24,10 @@ var $tasksContainer = $(".tasks");
 
 (function activate() {
  addUserFunctionality();
+ addTaskFunctionality();
 })();
 
+//======user======
 function addUserFunctionality() {
  var $userNameField = $('.userName');
  var $userEmailField = $('.userEmail');
@@ -114,3 +115,81 @@ function removeItem(list, item, callback) {
   callback();
  }
 }
+
+//======tasks=======
+function addTaskFunctionality() {
+ var $taskTittleField = $('.taskTittleField');
+ var $taskDescriptionField = $('.taskDescriptionField');
+ var $taskID = $('.taskID');
+ $(".addTaskButton").on("click", function () {
+  var valid = true,
+   errorText = "Field(s) ";
+  if (!validateRequired($taskTittleField)) {
+   errorText += "Task tittle ";
+   valid = false;
+  }
+  if (!validateRequired($taskDescriptionField)) {
+   errorText += "Task description ";
+   valid = false;
+  }
+  if (!validateRequired($taskID) ||
+   !validateID($taskID) ||
+   findInCollection(tasks, {"ID": $taskID.val()})
+  ) {
+   errorText += "Task ID ";
+   valid = false;
+  }
+  if (valid) {
+   tasks.push({
+    tittle: $taskTittleField.val(),
+    description: $taskDescriptionField.val(),
+    ID: $taskID.val(),
+    assignedTo: []
+   })
+   generateTasksList();
+  }
+  else {
+   alert(errorText + "are invalid");
+  }
+ })
+}
+
+function validateRequired(field) {
+ return $(field).val() || $(field).is(":checked");
+}
+
+function validateID(field) {
+ return $tasksContainer.test($(field).val());
+}
+
+function generateTasksList() {
+ tasksList = [];
+ tasks.forEach(function (task, index) {
+  tasksList[index] = generateTask(task);
+ });
+ $tasksContainer.html(tasksList);
+}
+
+function generateTasks(task) {
+ var li = $('<li />').data("task", task);
+ var taskTittle = $('<h2 class="taskTittle">'+taskTittle+'</h2>');
+ var createDate = $("<p>" + );
+ var taskDescription = $('<p class="taskDescription">'+taskDescription+'</p>');
+ var assignedLable = $('<label>Assigned</label>');
+ var button = $('<button type="button" class="move-top-btn">Move top</button>')
+  .on("click", function () {
+   removeItem(users, user, generateTasksList);
+  });
+  var button = $('<button type="button" class="move-bottom-btn">Move bottom</button>')
+  .on("click", function () {
+   removeItem(users, user, generateUsersList);
+  });
+  var button = $('<button type="button" class="delete-task-btn">Delete task</button>')
+  .on("click", function () {
+   removeItem(tasks, task, generateTasksList);
+  });
+  
+  
+ return li.append([taskTittle, taskDescription, assignedLable, button]);
+}
+
