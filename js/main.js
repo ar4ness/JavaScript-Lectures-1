@@ -173,9 +173,10 @@ function generateTasksList() {
 function generateTasks(task) {
  var li = $('<li />').data("task", task);
  var taskTittle = $('<h2 class="taskTittle">'+taskTittle+'</h2>');
- var createDate = $("<p>" + );
+ var createDate = $("<p>" + '</p>');
  var taskDescription = $('<p class="taskDescription">'+taskDescription+'</p>');
- var assignedLable = $('<label>Assigned</label>');
+ var assignedField = $('<p>Assigned to' + assignedUsers+' users</p>');
+ var assignedUsers = $('<span class="assigned users"></span>');
  var button = $('<button type="button" class="move-top-btn">Move top</button>')
   .on("click", function () {
    removeItem(users, user, generateTasksList);
@@ -193,3 +194,30 @@ function generateTasks(task) {
  return li.append([taskTittle, taskDescription, assignedLable, button]);
 }
 
+/*А теперь – в начало <body>:
+
+<style>
+.alert {
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+</style>
+
+<body>
+  <h3>Моя страница</h3>
+</body>
+
+<script>
+  var div = document.createElement('div');
+  div.className = "alert alert-success";
+  div.innerHTML = "<strong>Ура!</strong> Вы прочитали это важное сообщение.";
+
+  document.body.insertBefore(div, document.body.firstChild);
+</script>
+*/
+
+https://webformyself.com/ajax-zapros-v-jquery-chast-1/
+http://web-answers.ru/questions-and-answers/javascript/jquery/jquery-kak-sozdat-element-neskolko-sposobov/
