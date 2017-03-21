@@ -304,7 +304,7 @@ function test (a, b, c) {
 var newTest = _.curry(test);
 var newTest = newTest(_, 2, 10);
 $("h1").on('click', function () {
-	newTest(25);//28
+	newTest(25);//33
 })
 
 
