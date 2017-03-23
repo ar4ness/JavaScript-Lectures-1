@@ -8,11 +8,24 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
 		<script src="js/main.js" defer></script>
 	</head>
-	<body>
+	<body ng-app="app"><!--here we createour first scope rootscope -->
 		<!-- This is base template for testing -->
-		<h1 class="mainTitle">
-			<img class="logo" src="images/logo.png" alt=""/>
-			<span class="text">Lecture 22</span>
-		</h1>
+		<div ng-controller="myCtrl as myCtrl">
+			<h1 class="mainTitle" >
+			<!--{{test = 25}}-->
+				<img class="logo" src="images/logo.png" alt=""/>
+				<span class="text">{{myCtrl.serverData.myKey1}}</span>
+			</h1>
+			<h1>{{myCtrl.serverData.myKey2 | price}}</h1>
+			<button type="button" ng-click="myCtrl.askUser()">Ask user </button>
+			<p>{{myCtrl.userAction}}</p>
+			
+			<div ng-bind-html="myCtrl.html | toHtml">
+			</div>
+			<div ng-bind-html="myCtrl.html2 | toHtml">
+			</div>
+			
+			<h1>Timer: {{myCtrl.timer}}</h1>
+		</div>
 	</body>
 </html>
