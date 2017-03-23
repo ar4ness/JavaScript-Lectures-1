@@ -50,11 +50,19 @@
             })
         }
 
+     /* $("button").click(function () {
+        $(this).parent().slideUp("slow", function () {
+          $("#msg").text($("button", this)
+                  .text() + " - сделано!");
+        });
+      });*/
+
+
 		$('.addUserButton').click(function(){
 		  $('.addUser').hide(3s, function() {
-			$('\
-            <div class="userAddedMessage"></div>').html("User was added");
-		  });
+			$('<div class="userAddedMessage"></div>').html("User was added");
+		  }
+		  );
 		});
 		
         return $viewTemplate;
