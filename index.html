@@ -8,8 +8,8 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
 		<script src="js/main.js" defer></script>
 	</head>
-	<body ng-app="app"><!--here we createour first scope rootscope -->
-		<!-- This is base template for testing -->
+	<body ng-app="app"><!--here we create our first scope -  rootscope -->
+	
 		<div class="controller" ng-controller="myCtrl as myCtrl">
 			<h1 class="mainTitle" ng-if="myCtrl.usersFilter !=='2'" >
 			<!--{{test = 25}}-->
@@ -43,24 +43,24 @@
 			ng-focus="myCtrl.onBlur('ngFocus')"
 			/>
 			
-			<h1>{{myCtrl.selectedOptions}}</h1>
+			<!--<h1>{{myCtrl.selectedOptions}}</h1>-->
 			Required input <input type="text" ng-required="!myCtrl.selectedOptions">
 			<select
 			ng-model="myCtrl.selectedOptions"
 			ng-options="item.value as item.label for item in myCtrl.options">
 			</select>
 			
-			<h3 ng-switch="myCtrl.selectedOptions">
+			<p ng-switch="myCtrl.selectedOptions">
 				
 				<span ng-switch-when="item1">item1</span>
 				<span ng-switch-when="item2">item2</span>
 				<span ng-switch-default>default</span>
 				
-			</h3>
+			</p>
 			
 			<div>{{myCtrl.names}}</div>
 			<input type="checkbox" ng-checked="null == undefined" 
-			ng-disabled="null == myCtrl.usersFilter.length" />
+			ng-disabled="myCtrl.usersFilter.length" />
 			<h1 ng-show="myCtrl.usersFilter.length">{{123456789.012533456 | number | price}}</h1>
 			<ul> 
 				<!--<li ng-repeat="user in myCtrl.serverData.testArray | filter: ( email: myCtrl.usersFilter) track by user.email"></li>-->
