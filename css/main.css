@@ -8,3 +8,14 @@
 .mainTitle .text {
 	vertical-align:middle;
 }
+.controller {
+	width: 66%;
+	margin: 0 auto;
+}
+
+.classRed {
+	color: red;
+}
+.classBlue {
+	color: blue;
+}

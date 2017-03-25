@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Lecture 22</title>
+		<title>Lecture 22-23</title>
 		<link type="text/css" rel="stylesheet" media="all" href="css/main.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
@@ -10,11 +10,11 @@
 	</head>
 	<body ng-app="app"><!--here we createour first scope rootscope -->
 		<!-- This is base template for testing -->
-		<div ng-controller="myCtrl as myCtrl">
-			<h1 class="mainTitle" >
+		<div class="controller" ng-controller="myCtrl as myCtrl">
+			<h1 class="mainTitle" ng-if="myCtrl.usersFilter !=='2'" >
 			<!--{{test = 25}}-->
-				<img class="logo" src="images/logo.png" alt=""/>
-				<span class="text">{{myCtrl.serverData.myKey1}}</span>
+				<img class="logo" ng-src="{{myCtrl.imageSrc}}" alt=""/>
+				<span class="text"> Lecture 22-23 {{myCtrl.serverData.myKey1}}</span>
 			</h1>
 			<h1>{{myCtrl.serverData.myKey2 | price}}</h1>
 			<button type="button" ng-click="myCtrl.askUser()">Ask user </button>
@@ -24,8 +24,87 @@
 			</div>
 			<div ng-bind-html="myCtrl.html2 | toHtml">
 			</div>
+			<h1
+			ng-mousemove="myCtrl.timer = $event.clientX">Timer: {{myCtrl.timer}}</h1>
 			
-			<h1>Timer: {{myCtrl.timer}}</h1>
+			
+			
+			<h2
+			ng-hide="myCtrl.usersFilter.length"
+			>{{myCtrl.date | date: 'dd/MM/yy'}}</h2>
+			<input type="text" ng-model="myCtrl.usersFilter" 
+			ng-model-options="{
+			updateOn: 'blur',
+			debounce: 1000
+			}"
+			ng-blur="myCtrl.serverData.myKey2 = myCtrl.serverData.myKey2 + 'blur'; myCtrl.onBlur('ngBlur')"
+			ng-keyup="$event.keyCode === 13 && myCtrl.onBlur($event.keyCode)" 
+			ng-change="myCtrl.onBlur('ngChange')"
+			ng-focus="myCtrl.onBlur('ngFocus')"
+			/>
+			
+			<h1>{{myCtrl.selectedOptions}}</h1>
+			Required input <input type="text" ng-required="!myCtrl.selectedOptions">
+			<select
+			ng-model="myCtrl.selectedOptions"
+			ng-options="item.value as item.label for item in myCtrl.options">
+			</select>
+			
+			<h3 ng-switch="myCtrl.selectedOptions">
+				
+				<span ng-switch-when="item1">item1</span>
+				<span ng-switch-when="item2">item2</span>
+				<span ng-switch-default>default</span>
+				
+			</h3>
+			
+			<div>{{myCtrl.names}}</div>
+			<input type="checkbox" ng-checked="null == undefined" 
+			ng-disabled="null == myCtrl.usersFilter.length" />
+			<h1 ng-show="myCtrl.usersFilter.length">{{123456789.012533456 | number | price}}</h1>
+			<ul> 
+				<!--<li ng-repeat="user in myCtrl.serverData.testArray | filter: ( email: myCtrl.usersFilter) track by user.email"></li>-->
+				<li ng-repeat="user in myCtrl.serverData.testArray | filter:  myCtrl.usersFilterMethod | orderBy: 'age': true | limitTo: 2 track by user.email"
+				ng-init="myCtrl.names[$index] = user.name"
+				ng-class="{
+				'classRed': $first,
+				'classBlue': $last
+				}">
+				
+				<h2>{{::user.name | lowercase}}</h2>
+				<h2>{{::user.email |uppercase}}</h2>
+				<h3>Age: {{::user.age}}</h3>
+				<h3>{{$first}}</h3>
+				<h3>{{$index}}</h3>
+				<h3>{{$last}}</h3>
+				</li>
+				<!--<li ng-repeat="user in myCtrl.serverData.testArray track by $index"></li>-->
+				
+			</ul>
+			<my-component></my-component>
 		</div>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

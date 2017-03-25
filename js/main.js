@@ -36,7 +36,8 @@ $http - сервис который позволяет делать ajax зап�
 	"use strict";
 	angular.module("app", [
 	"price",
-	"toHtml"
+	"toHtml",
+	"myComponent"
 	]).run(function($templateCache) {
 		$templateCache.put("myTemplate.html", "This is the <br/> content");
 	});
@@ -76,9 +77,6 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 
 
 
-
-
-
 (function () {
 	"use strict";
 	angular.module("app")
@@ -93,18 +91,42 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 		myCtrl.price = $filter("price")(25, "#");
 		myCtrl.serverData = {};
 		myCtrl.userAction = "";
-		myCtrl.askUser = askUser;
 		myCtrl.html = '<h1>test</h1>';
 		myCtrl.html2 = $templateCache.get('myTemplate.html');
-		
 		myCtrl.timer = new Date().getSeconds();
+		myCtrl.date =  new Date(); /*or use(as we have jquery) $.now()*/
+		myCtrl.usersFilter = "";
+		myCtrl.names = [];
+		myCtrl.selectedOptions = "";
+		myCtrl.imageSrc = "";
 		
+		myCtrl.options = [
+		{value: "", label: "select item"},
+		{value: "item1", label: "item 1 label"},
+		{value: "item2", label: "item 2 label"},
+		{value: "item3", label: "item 3 label"},
+		{value: "item4", label: "item 4 label"},
+		{value: "item5", label: "item 5 label"}
+		]
+		
+		myCtrl.onBlur = onBlur;
+		myCtrl.askUser = askUser;
+		myCtrl.usersFilterMethod = usersFilterMethod;
+		
+		function onBlur($event) {
+			console.log($event);
+		}
+		
+		function usersFilterMethod(elem, index, array) {
+			return ~elem.name.toLowerCase().indexOf(myCtrl.usersFilter.toLowerCase());
+		}
+
 		$scope.$applyAsync(function () {
 			myCtrl.serverData = {"myKey1": "asdasd"};
 		})
 		
 		$http.get("http://www.mocky.io/v2/58d4161a100000db0cd7a6b5").then(function (data) {
-			console.log(data);
+			/*console.log(data);*/
 			myCtrl.serverData = data.data;
 		});
 		/*console.log($scope);*/
@@ -112,6 +134,7 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 		function askUser () {
 			myModal().then(function (userAnswer) {
 				myCtrl.userAction = userAnswer;
+				myCtrl.imageSrc = "image/logo.png";
 			})
 		}
 		
@@ -136,9 +159,19 @@ $timeout и $interval - расширенные версии нативных set
 })();
 
 
+(function () {
+	"use strict";
+	angular.module("myComponent", [])
+	.component("myComponent", myComponent());
+	function myComponent() {
+		return (
+		template: <div><h1>Component title </h1><ng-transclude></div>
+		)
+		transclude: true;
+	}
+})()
 
-
-
+http://www.worldometers.info/
 
 
 
