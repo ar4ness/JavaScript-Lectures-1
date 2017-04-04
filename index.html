@@ -82,7 +82,28 @@
 				
 			</ul>
 			<my-component></my-component>
-		</div>
+      <h1>Messages</h1>
+      <h2>New message: {(myCtrl.getMessage())}</h2>
+      <h3>Messages count: {(myCtrl.getMessagesCount())}</h3>
+
+
+      <form action="#"
+      ng-controller="messagesController as messagesController"
+      >
+        <textarea ng-model="messagesController.messageField"></textarea>
+        <button type="button"
+        ng-click="messagesController.sendMessage(messagesController.messageField)"
+        >SEnd message</button>
+      </form>
+    </div>
+      <div
+      ng-controller="messagesController as messagesController"
+      >
+        <my-messenger title="Send message form" on-message-sent="messagesController.sendMessage(message)">
+        </my-messenger>
+		  </div>
+      <h1 style="position: fixed; right: 50px; bottom: 50px;" scroll-to-top>^^Scroll top^^</h1>
+
 	</body>
 </html>
 

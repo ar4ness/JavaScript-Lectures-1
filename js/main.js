@@ -37,7 +37,9 @@ $http - сервис который позволяет делать ajax зап�
 	angular.module("app", [
 	"price",
 	"toHtml",
-	"myComponent"
+	"myComponent",
+		"scrollService",
+    "scrollToTop"
 	]).run(function($templateCache) {
 		$templateCache.put("myTemplate.html", "This is the <br/> content");
 	});
@@ -82,8 +84,8 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 	angular.module("app")
 		.controller("myCtrl", myCtrl);
 	
-	myCtrl.$inject = ["$scope", "$filter", "$http", "$q", "$sce", "$templateCache", "$interval"];	
-	function myCtrl($scope, $filter, $http, $q, $sce, $templateCache, $interval){
+	myCtrl.$inject = ["$scope", "$filter", "$http", "$q", "$sce", "$templateCache", "$interval", "testConstant", "testConstant2", "message", "messages"];
+	function myCtrl($scope, $filter, $http, $q, $sce, $templateCache, $interval, testConstant, testConstant2, message, messages){
 		var myCtrl = this;
 		/*$scope.price=25;*/
 		//myCtrl.price = 25;
@@ -99,20 +101,32 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 		myCtrl.names = [];
 		myCtrl.selectedOptions = "";
 		myCtrl.imageSrc = "";
-		
+
+    console.log("testConstant", testConstant);
+
 		myCtrl.options = [
-		{value: "", label: "select item"},
+		{value: "", label: "Select item"},
 		{value: "item1", label: "item 1 label"},
 		{value: "item2", label: "item 2 label"},
 		{value: "item3", label: "item 3 label"},
 		{value: "item4", label: "item 4 label"},
 		{value: "item5", label: "item 5 label"}
-		]
+		];
 		
 		myCtrl.onBlur = onBlur;
 		myCtrl.askUser = askUser;
 		myCtrl.usersFilterMethod = usersFilterMethod;
-		
+		myCtrl.getMessage = getMessage;
+		myCtrl.getMessagesCount = getMessagesCount;
+
+		function getMessage () {
+			return messages.message;
+		}
+		function getMessagesCount () {
+			return messages.list.length;
+		}
+
+
 		function onBlur($event) {
 			console.log($event);
 		}
@@ -123,7 +137,7 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 
 		$scope.$applyAsync(function () {
 			myCtrl.serverData = {"myKey1": "asdasd"};
-		})
+		});
 		
 		$http.get("http://www.mocky.io/v2/58d4161a100000db0cd7a6b5").then(function (data) {
 			/*console.log(data);*/
@@ -134,7 +148,7 @@ $sce - ангуляр не позволяет встраивать в HTML лю
 		function askUser () {
 			myModal().then(function (userAnswer) {
 				myCtrl.userAction = userAnswer;
-				myCtrl.imageSrc = "image/logo.png";
+				myCtrl.imageSrc = "images/logo.png";
 			})
 		}
 		
@@ -164,28 +178,221 @@ $timeout и $interval - расширенные версии нативных set
 	angular.module("myComponent", [])
 	.component("myComponent", myComponent());
 	function myComponent() {
-		return (
-		template: <div><h1>Component title </h1><ng-transclude></div>
-		)
-		transclude: true;
+		return {
+			template: "<div><h1>Component title </h1><ng-transclude></div>",
+			transclude: true
+		}
 	}
-})()
+})();
+////////////==============LECTURE 23--------------
+/*Фильтры:
+ date - фильтр, который позволяет преобразовывать дату в разные форматы. Кроме даты принимает формат и тайм зону.
+ filter - применяетcя к массиву чтобы отфильтровать его, как правило для фильтрации используется строка, если строка фигурирует в элементе, то такой элемент проходит фильтрацию  объект, если объекты в массиве содержат те же ключи и значения что и шаблонный, то такие элементы проходят фильтрацию или функция компаратор с ней в конечный массив попадут только те элементы, для которых она вернёт true.
+ limitTo - принимает в себя массив, число или строку и лимит, возвращает первые n знаков для числа и строки и первые n элементов для массива.
 
+ <<<<<<< HEAD
+ /*http://www.worldometers.info/
+		lowercase и uppercase - приводят текст к соотвтетствующему регистру.
+		orderBy - используется для сортировки массива, может сортировать по полям объектов, реверсить напрявление сортировки, с помощью функции копаратора и не только.
+		number - делит число по 3 знака, разделяет запятыми и округляет его, по умолчанию до 3го знака после точки, формат может меняться.
+>>>>>>> 35d51445e6f1483c51453ece1d03e08e708753e8
+
+Директивы:
+		ngApp - основная точка входа в приложение, может быть всего одна на странице, как правило указывается в html или body и принимает аргументом имя модуля, который будет основным на сайте.
+		ngBindHtml - используется для вывода html разметки на страницу, зачастую html требуется сначало "прогнать" через $sce.trustAsHtml.
+		ngBlur - используется на элементах формы и срабатывает при потере элементом фокуса.
+		ngChange - используется на элементах формы и срабатывает каждый раз когда в них что-либо меняется.
+
+		ngChecked - используется на чекбоксах и радиобаттонах, если выражение переданное в директиву истинно, то элемент становится выбраным.
+		ngClass - используется для добавления и удаления классов на элементах, чаще всего используется синтаксис объекта, где класс(классы) выступаеют ключами, а выражения, которые определяют применить класс или убрать значениями.
+		ngClick - переданное выражение вызывается при кликена элемент.
+		ngController - используется для вызова контроллера для данной части разметки, рекомендуется использовать синтаксис controllerAs, но об этом позже.
+		ngDisabled - используется на элементах формы, если переданное выражение истинно, то элемент становится отключён.
+
+		ngFocus - переданное выражение вызывается при фокусе элемента.
+		ngForm - используется в том случае, если вы не можете использовать тэг form, как его замена.
+		ngHide/ngShow - если выражение истинно, то элемент показывается или скрывается. Обе директивы работают в обе стороны(уменют и показывать и скрывать).
+ngIf - если выражение истинно, то элемент и все его потомки добавляются в DOM дерево, иначе удаляются.
+		ngInit - позволяет выполнить выражение когда элемент появляется в DOM.
+		ngKeydown/ngKeypress/ngKeyup - срабатывают при нажатии клавиш клавиатуры, как правило на input или textarea.
+
+		ngModel - связывает элемент формы с моделью таким образом, что любые изменения модели тут же меняют элемент, а измения элемента записываюстя в модель.
+		ngModelOptions - позволяет задать дополнительные опции для ngModel, такие как debounce.
+		ngMousedown/ngMousemove/etc... - события мыши которые можно отслеживать на элементе на котором находится директива.
+		ngOptions - специальная директива для построения списка опций для select, но основе модели.
+		ngRepeat - директива позволяющая дублировать данный элемент и всех его потомков на основе перебора коллекции, у неё довольно много настроек, но основная track by, которая указывает по чему будет определяться уникальность элемента. В случае её отсутствия повторение в массиве приведёт к ошибке.
+
+		ngRequired - элемент формы будет считаться обязательным для заполнения только если выражение в директиве истинно.
+		ngSrc - используется как замена src на тэге img. Нужна для того чтобы не было ошибок из-за неправильного src у картинокесли эти ссылки вставляются динамически.
+		ngSwitch – используется как switch case для view. Показывает только те элементы для которых выражение истинно.
+		ngTransclude - используется для директив, когда нужно передать им шаблон извне.
+
+
+
+*/
 /*http://www.worldometers.info/*/
 
+////////////////=============LECTURE 24++++++++++++++++
+(function () {
+  "use strict";
+  angular.module("app")
+      .constant("testConstant", "testConstantValue")
+      .constant("testConstant2", {
+        "key1": "value1",
+        "key2": "value2"
+      })
+}) ();
+
+(function () {
+  angular.module("app")
+      .value("message", "")
+      .value("messages", {
+        list: [],
+				message: ""
+        //"key2": "value2"
+      })
+}) ();
+
+(function () {
+	"use strict";
+
+  angular.module("app")
+      .controller("messagesController", messagesController);
+	messagesController.$inject = ["message", "messages", "scrollService"];
+	function messagesController(message, messages, scrollService) {
+		var messagesController = this;
+		messagesController.messageField = "";
+		messagesController.sendMessage =sendMessage;
+
+		function sendMessage(newMessage) {
+      scrollService.scrollTop(0);
+			messages.list.push(newMessage);
+			messages.message = newMessage;
+		}
+	}
+}) ();
 
 
+(function () {
+	"use strict";
 
+	angular.module("scrollService", [])
+	  .service("scrollService", scrollService);
+  scrollService.$inject =["testFactory"];
+	function scrollService(testFactory) {
+		return {
+			scrollTop: scrollTop
+		};
 
+    function scrollTop(position) {
+      console.log(testFactory);
+      testFactory.method();
+			$("html, body").animate({"scrollTop": position}, 500);
+		}
+	}
+}) ();
 
+(function () {
+  "use strict";
+  angular.module("app")
+      .factory("testFactory", testFactory);
 
+  function testFactory() {
+    return {
+      key1: "value1",
+      key2: "value2",
+      obj: {"test": "test"},
+      method: method
+    };
+    function method() {
+      console.log("Hi, I'm method");
+    }
+  }
+}) ();
 
+(function () {
+  "use strict";
+  angular.module('app').component("myMessenger", myMessenger());
+      function myMessenger() {
+        myMessengerCtrl.$inject = ['messages'];
+        return {
+          templateUrl: "componentTemplate.html",
+          //template: "<div><h1></h1></div>",
+          controller: myMessengerCtrl,
+          controllerAs: "myMessenger",
+          transclude: false,
+          bindings: {
+            title: "@",
+            onMessageSent: "&"
+          }
+        };
 
+      function myMessengerCtrl(messages) {
+        var myMessengerCtrl = this;
+        myMessengerCtrl.messageField = "";
+        myMessengerCtrl.sendMessage = sendMessage;
+        function sendMessage(message) {
+          myMessengerCtrl.onMessageSent({"message": message});
+          messages.message = message;
+          messages.list.push(message);
+        }
+      }
+      }
+}) ();
 
+(function () {
+  "use strict";
 
+  angular.module("scrollToTop", ["scrollService"]).directive("scrollToTop", scrollToTop);
 
+  scrollToTop.$inject = ["scrollService"];
+  function scrollToTop (scrollService) {
+    return {
+      restrict: "A",
+    //templateUrl: "",
+      //template: "",
+      //controller: controller,
+      //controllerAs: "controllerAs",
+      link: link
+      //require:"",
+      //transclude: false,
+      //bindToController: false,
+      //scope: false
+    }
+    function link($scope, $element) {
+      $element.on("click", function() {
+        scrollService.scrollTop(0);
+      })
+    }
+  }
+}) ();
 
-
+(function() {
+  angular.module("app").factory("myInterceptors", myInterceptors).config(interceptorsConfig);
+  myInterceptors.$inject =["$q"];
+  function  myInterceptors($q) {
+    return {
+      request: function(config) {
+        console.log(config);
+        return config;
+      },
+      response: function(response) {
+        console.log(response);
+        return response;
+      },
+      requestError: function (rejectReason) {
+        return $q.reject(rejectReason);
+      },
+      responseError: function(response) {
+        return $q.reject(response);
+      }
+    }
+  }
+  interceptorsConfig.$inject = ['$httpProvider'];
+  function interceptorsConfig ($httpProvider) {
+    $httpProvider.interceptors.push('myInterceptors');
+  }
+} ) ();
 
 
 
