@@ -171,7 +171,7 @@ $timeout и $interval - расширенные версии нативных set
 	}
 })()
 
-http://www.worldometers.info/
+/*http://www.worldometers.info/*/
 
 
 
