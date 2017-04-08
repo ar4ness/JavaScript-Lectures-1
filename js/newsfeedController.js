@@ -6,7 +6,7 @@
 
   angular.module("newsfeed").controller("newsfeed", newsfeed);
 
-  newsfeed.$inject = ["http", "NEWSFEED_URL_CONSTANTS"];
+  newsfeed.$inject = ["$http", "NEWSFEED_URL_CONSTANTS"];
   function newsfeed($http, NEWSFEED_URL_CONSTANTS) {
     var newsfeed = this;
 
@@ -23,6 +23,7 @@
     newsfeed.removePhoto =    removePhoto;
     newsfeed.addPhoto =    addPhoto;
     newsfeed.saveArticle = saveArticle;
+    newsfeed.deleteArticle = deleteArticle;
 
     //Function
 
@@ -66,14 +67,13 @@
       }
     }
 
-    function saveArticle() {
+    /*function saveArticle() {
       if(newsfeed.newArticleForm.$invalid) {
         newsfeed.newArticleForm.$setSubmitted();
         return false;
       }
       if( newsfeed.newArticleModel.id) {
-        $http.put(NEWSFEED_URL_CONSTANTS["PUT_ARTICLE"], newsfeed.newArticleModel)
-            .then(function () {
+        $http.put(NEWSFEED_URL_CONSTANTS["PUT_ARTICLE"], newsfeed.newArticleModel).then(function () {
               var articleIndex = _.findIndex(newsfeed.articles, {'id': newsfeed.newArticleModel.id}
               );
               newsfeed.articles[articleIndex] = newsfeed.newArticleModel;
@@ -81,17 +81,45 @@
             })
       }
       else{
-        newsfeed.newArticleModel.createDate = $.now();
-        $http.post(NEWSFEED_URL_CONSTANTS["POST_ARTICLE"], newsfeed.newArticleModel)
-            .then(function() {
-              newsfeed.articles.push(newsfeed.newArticleModel);
-            })
+        newsfeed.newArticleModel.createdDate = $.now();
+        $http.post(NEWSFEED_URL_CONSTANTS["POST_ARTICLE"], newsfeed.newArticleModel).then(function() {
+            newsfeed.articles.push(newsfeed.newArticleModel);
+            hideEditPopup();
+          })
+       }
+    }*/
+    function saveArticle() {
+      if(newsfeed.newArticleModel.$invalid){
+        newsfeed.newArticleForm.$setSubmitted();
+        return false;
       }
+      if (newsfeed.newArticleModel.id) {
+        $http.put(NEWSFEED_URL_CONSTANTS["PUT_ARTICLE"], newsfeed.newArticleModel).then(function(){
+          var articleIndex = _.findIndex(newsfeed.articles, {'id': newsfeed.newArticleModel.id});
+          newsfeed.articles[articleIndex] = newsfeed.newArticleModel;
+        });
+        hideEditPopup();
+      }
+      else {
+        newsfeed.newArticleModel.createDate = $.now();
+        $http.post(NEWSFEED_URL_CONSTANTS["POST_ARTICLE"], newsfeed.newArticleModel).then(function () {
+          newsfeed.articles.push(newsfeed.newArticleModel);
+        });
+        hideEditPopup();
+      }
+    }
+
+    function deleteArticle(article, $index) {
+      $http.delete(NEWSFEED_URL_CONSTANTS["DELETE_ARTICLE"] + "?id="+article.id).then(function(response) {
+        newsfeed.articles.splice($index, 1);
+      })
     }
 
     //initialization
     (function () {
-
+    $http.get(NEWSFEED_URL_CONSTANTS["GET_ARTICLE"]).then(function (response) {
+      newsfeed.articles = response.data;
+    })
     })();
   }
 })();

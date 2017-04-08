@@ -1,9 +1,9 @@
-(function  () {
+(function() {
   "use strict";
   angular.module("newsfeed").constant("NEWSFEED_URL_CONSTANTS", {
-        "GET_NEWSFEED": "http://www.mocky.io/v2/58e6872b0f0000b6044aee6f",
-        "PUT_ARTICLE": "http://www.mocky.io/v2/58e6872b0f0000b6044aee6f",
-        "POST_ARTICLE": "http://www.mocky.io/v2/58e6872b0f0000b6044aee6f" ,
-        "DELETE_ARTICLE": "http://www.mocky.io/v2/58e6872b0f0000b6044aee6f"
+        "GET_NEWSFEED": "http://www.mocky.io/v2/58e8a0061200003d1559b693",
+        "PUT_ARTICLE": "http://www.mocky.io/v2/58e8a0061200003d1559b693",
+        "POST_ARTICLE": "http://www.mocky.io/v2/58e8a0061200003d1559b693" ,
+        "DELETE_ARTICLE": "http://www.mocky.io/v2/58e8a0061200003d1559b693"
       })
 })();

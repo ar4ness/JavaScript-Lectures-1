@@ -33,6 +33,7 @@
 	left: 50%;
 	top: 40%;
 	transform: translate(-50%, -50%);
+  z-index:1;
 
 }
 .popupForm .close {
@@ -57,10 +58,54 @@
 	border-color: red;
 }
 
+.newsfeedList li {
+  position: relative;
+}
+.newsfeedList li:hover .editButtons {
+  opacity: 1;
+  visibility: visible;
+}
 
+.editButtons {
+  position: absolute;
+  right: 25px;
+  top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease-in-out;
+}
+.newsfeedList {
+  margin: 20px 0 0;
+  padding: 0;
+}
+.newsfeedList li {
+  margin:0 0 20px;
+  border: 1px solid #ccc;
+  border-radius:10px;
+  list-style: none;
+  padding:20px;
+  box-sizing: border-box;
+}
+.newsfeedList li img {
+  width: 200px;
+  margin: 20px 0 0 10px;
+  vertical-align: top;
+}
+.newsfeedList li .video a {
+  display: block;
+  position: relative;
+}
+.newsfeedList li .video a:after {
+  content: '';
+  border-style:solid;
+  border-width: 35px 60px 35px 60px;
+  position: absolute;
+  left:50%;
+  top: 50%;
+  transform: translate(-25%, -50%);
+  border-color: transparent transparent transparent #ccc;
 
-
-
+}
 
 
 

@@ -10,6 +10,10 @@
 		<script src="js/newsfeedModule.js" defer></script>
 		<script src="js/newsfeedController.js" defer></script>
 		<script src="js/newsfeedUrlConstants.js" defer></script>
+		<script src="js/newsfeedDescriptionFilter.js" defer></script>
+		<script src="js/toHtml.js" defer></script>
+		<script src="js/articleComponents.js" defer></script>
+		<script src="js/photoComponents.js" defer></script>
 	</head>
 	<body ng-app="app" ng-cloak>
 		<!-- This is base template for testing -->
@@ -24,10 +28,11 @@
       <button type="button" ng-click="newsfeed.showEditPopup()">Add new article </button>
       <div class="popupForm" ng-show="newsfeed.editPopupVisible">
 
-        <form name="newsfeed.newArticleForm" novalidate>
+        <form action="#" name="newsfeed.newArticleForm" novalidate>
+          <div class="formSection" >
           <span class="close" ng-click="newsfeed.hideEditPopup()">X</span>
 
-          <div class="formSection" >
+
             <p>Article Type</p>
             <select ng-model="newsfeed.newArticleModel.type">
             <option value="article">Article</option>
@@ -78,17 +83,35 @@
           </div>
         </form>
       </div>
-
+      <!--Popup end-->
 
     <!--Article list starts-->
-    <ul>
-      <li ng-repeat="article in newsfeed.articles track by $index">
-        <h3>{{article.title}}</h3>
-        <span>{{article.createdDate | date}}</span>
+    <ul class="newsfeedList">
+      <li ng-repeat="article in newsfeed.articles track by $index"
+          ng-switch="article.type">
+
+
+
+
+        <div class="photos"
+             ng-switch-when="photos">
+          <img ng-repeat="photo in article.photos track by $index"
+                  ng-src="{{photo}}"/>
+        </div>
+        <div class="video"
+             ng-switch-when="video">
+          <a href="{{article-video}}" target="_blank">
+            <img ng-src="{{article.mainPhoto}}" />
+          </a>
+        </div>
+
+        <div class="editButtons">
+          <button type="button" ng-click="newsfeed.showEditPopup(article)">Edit</button>
+          <button type="button" ng-click="newsfeed.deleteArticle(article, $index)">Delete</button>
+        </div>
       </li>
     </ul>
   <!--Article list ends-->
     </div>
-    <!--Popup end-->
 	</body>
 </html>
