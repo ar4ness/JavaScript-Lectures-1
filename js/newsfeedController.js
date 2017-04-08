@@ -4,8 +4,7 @@
 (function () {
   "use strict";
 
-  angular.module("newsfeed")
-  .cotroller("newsfeed", newsfeed);
+  angular.module("newsfeed").controller("newsfeed", newsfeed);
 
   newsfeed.$inject = ["http", "NEWSFEED_URL_CONSTANTS"];
   function newsfeed($http, NEWSFEED_URL_CONSTANTS) {
@@ -72,11 +71,11 @@
         newsfeed.newArticleForm.$setSubmitted();
         return false;
       }
-      if( newsfeed.newArticleModel.id ) {
+      if( newsfeed.newArticleModel.id) {
         $http.put(NEWSFEED_URL_CONSTANTS["PUT_ARTICLE"], newsfeed.newArticleModel)
-            .then(function() {
+            .then(function () {
               var articleIndex = _.findIndex(newsfeed.articles, {'id': newsfeed.newArticleModel.id}
-              )
+              );
               newsfeed.articles[articleIndex] = newsfeed.newArticleModel;
               hideEditPopup();
             })

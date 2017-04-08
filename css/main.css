@@ -20,6 +20,7 @@
 	color: blue;
 }
 
+/**Form styles*/
 .popupForm {
 	display: block;
 	text-align: center;
@@ -40,16 +41,13 @@
 	right: 25px;
 	cursor: pointer;
 }
-
 .formSection {
 	width: 40%;
 	display: inline-block;
 }
-
 .formSection input, .formSection textarea, .formSection select {
 	width: 80%;
 }
-
 .newsfeed {
 	width: 80%;
 	margin: 50px auto;

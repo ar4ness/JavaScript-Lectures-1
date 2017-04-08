@@ -44,7 +44,6 @@
           <div class="formSection" ng-show="newsfeed.newArticleModel.type === 'article' || newsfeed.newArticleModel.type === 'video'" >
             <p>Main Photo</p>
             <input type="text" ng-model="newsfeed.newArticleModel.mainPhoto"/>
-            <testarea ng-model="newsfeed.newArticleModel.description"></testarea>
           </div>
 
           <div class="formSection" ng-required="newsfeed.newArticleModel.type === 'article'" ng-show="newsfeed.newArticleModel.type === 'video' || newsfeed.newArticleModel.type === 'article'">
@@ -59,8 +58,8 @@
             <div style="padding:3px; border: 1px solid grey"
                     ng-repeat="photo in newsfeed.newArticleModel.photos track by $index">
               <input type="text"
-                     ng-model="newsfeed.newArticleModel.photos(&index)"/>
-              <button type="button" ng-click="newsfeed.removePhoto($index)">Remove photo</button>
+                     ng-model="newsfeed.newArticleModel.photos[$index]"/>
+              <button type="button" ng-click="newsfeed.removePhoto[$index]">Remove photo</button>
             </div>
               <button type="button"ng-click="newsfeed.addPhoto()">Add photo</button>
           </div>
@@ -79,8 +78,8 @@
           </div>
         </form>
       </div>
-    </div>
-<!--Popup end-->
+
+
     <!--Article list starts-->
     <ul>
       <li ng-repeat="article in newsfeed.articles track by $index">
@@ -89,5 +88,7 @@
       </li>
     </ul>
   <!--Article list ends-->
+    </div>
+    <!--Popup end-->
 	</body>
 </html>
